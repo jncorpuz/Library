@@ -29,7 +29,7 @@ public class Database
      *
      * @param sqlStatement
      */
-    public static void Insert(String sqlStatement)
+    public static void ExecuteStatement(String sqlStatement) //Insert, Update, Delete
     {
        try 
        {
@@ -48,5 +48,28 @@ public class Database
        {
            JOptionPane.showMessageDialog(null, e.getMessage());
        }
+    }
+    
+    public static ResultSet ExecuteQuery(String sqlStatement) //Select
+    {
+        try 
+        {
+            Connection dbCon = DriverManager.getConnection(connectionStr, username, password);
+            Statement dbCom = dbCon.createStatement();
+            ResultSet sqlRecord = dbCom.executeQuery(sqlStatement);
+            dbCom.close();
+            dbCon.close();
+           
+            return sqlRecord;
+        }
+        catch (SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return null;
     }
 }
