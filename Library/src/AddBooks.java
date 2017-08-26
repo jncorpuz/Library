@@ -53,7 +53,8 @@ public class AddBooks extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jTabbedPane = new javax.swing.JTabbedPane();
         TabBook = new javax.swing.JPanel();
@@ -144,15 +145,19 @@ public class AddBooks extends javax.swing.JFrame {
         jScrollPane3.setViewportView(txtPub);
 
         cmdSave.setText("Save");
-        cmdSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cmdSave.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 cmdSaveActionPerformed(evt);
             }
         });
 
         cmdclr.setText("Clear");
-        cmdclr.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cmdclr.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 cmdclrActionPerformed(evt);
             }
         });
@@ -275,26 +280,32 @@ public class AddBooks extends javax.swing.JFrame {
         jLabel11.setText("Shelf Location:");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null},
                 {null, null},
                 {null, null},
                 {null, null}
             },
-            new String [] {
+            new String []
+            {
                 "Title 1", "Title 2"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
+        )
+        {
+            boolean[] canEdit = new boolean []
+            {
                 true, false
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
         jScrollPane4.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
+        if (jTable1.getColumnModel().getColumnCount() > 0)
+        {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
             jTable1.getColumnModel().getColumn(1).setResizable(false);
         }
@@ -302,8 +313,10 @@ public class AddBooks extends javax.swing.JFrame {
         jLabel14.setText("Shelf Location List");
 
         cmdSSave.setText("Save");
-        cmdSSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cmdSSave.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 cmdSSaveActionPerformed(evt);
             }
         });
@@ -345,13 +358,15 @@ public class AddBooks extends javax.swing.JFrame {
         jLabel12.setText("Book Type:");
 
         jTable3.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null},
                 {null, null},
                 {null, null},
                 {null, null}
             },
-            new String [] {
+            new String []
+            {
                 "Title 1", "Title 2"
             }
         ));
@@ -360,8 +375,10 @@ public class AddBooks extends javax.swing.JFrame {
         jLabel15.setText("Book Type List");
 
         cmdTSave.setText("Save");
-        cmdTSave.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cmdTSave.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 cmdTSaveActionPerformed(evt);
             }
         });
@@ -401,23 +418,29 @@ public class AddBooks extends javax.swing.JFrame {
         jTabbedPane.addTab("Add New Book Type", TabBtype);
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
 
             },
-            new String [] {
+            new String []
+            {
                 "Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8", "Title 9", "title 10"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
+        )
+        {
+            boolean[] canEdit = new boolean []
+            {
                 false, false, false, false, true, false, false, false, false, false
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
         jScrollPane5.setViewportView(jTable2);
-        if (jTable2.getColumnModel().getColumnCount() > 0) {
+        if (jTable2.getColumnModel().getColumnCount() > 0)
+        {
             jTable2.getColumnModel().getColumn(0).setResizable(false);
             jTable2.getColumnModel().getColumn(1).setResizable(false);
             jTable2.getColumnModel().getColumn(2).setResizable(false);

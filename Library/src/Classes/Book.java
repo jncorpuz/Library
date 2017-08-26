@@ -13,10 +13,12 @@ public class Book extends BookInfo
 {
     private String id;
     private Shelf shelf;
+    private boolean isBorrowed;
     
     public Book(String bookISBN)
     {
         super(bookISBN);
     }
+    
     
 }
