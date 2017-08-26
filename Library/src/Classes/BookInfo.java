@@ -6,17 +6,18 @@
 package Classes;
 
 import java.sql.*;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author jncor
  */
-public class BookInfo
+public class BookInfo implements IDatabase
 {
     private String isbn;
     private String title;
     private Author author = new Author();
-    private BookType type = new BookType();
+    private Genre genre = new Genre();
     private String summary;
     private String length;
     private String alternateTitles;
@@ -26,33 +27,47 @@ public class BookInfo
     BookInfo(String isbn) throws SQLException
     {
         this.isbn = isbn;
-        GetBookInfo();
+        GetData();
     }
     
     public String getISBN() { return isbn; }
     public String getTitle() { return title; }
     public Author getAuthor() { return author; }
-    public BookType getBookType() { return type; }
+    public Genre getGenre() { return genre; }
     public String getSummary() { return summary; }
     public String getLength() { return length; }
     public String getAlternateTitles() { return alternateTitles; }
     public String getYearReleased() { return yearReleased; }
     public String getPublicationInfo() { return publicationInfo; }
     
-    public void GetBookInfo() throws SQLException
+    @Override
+    public final void GetData()
     {
+        try
+        {
         String sqlStatement = "select * from bookinfo where isbn='" + this.isbn + "';";
-        ResultSet bookInfo = Database.ExecuteQuery(sqlStatement);
+        Connection dbCon = Database.DBConnection();
+        Statement dbCom = dbCon.createStatement();
+        ResultSet bookInfo = dbCom.executeQuery(sqlStatement);
         
         this.title = bookInfo.getString("title");
         this.author.setFirstName(null);
         this.author.setLastName(null);
-        //set booktype
+        this.genre = new Genre(bookInfo.getString("genreID"));
         this.summary = bookInfo.getString("summary");
         this.length = bookInfo.getString("length");
         this.alternateTitles = bookInfo.getString("alternateTitle");
         this.yearReleased = bookInfo.getString("yearReleased");
         this.publicationInfo = bookInfo.getString("publicationInfo");
+        }
+        catch (SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
     }
 }
 

@@ -1,3 +1,5 @@
+package Forms;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -35,12 +37,12 @@ public class LibraryBooks extends javax.swing.JFrame
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0));
         jPanel1 = new javax.swing.JPanel();
         lblPicture = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txtPublisher = new javax.swing.JTextField();
         txISB = new javax.swing.JTextField();
         txtTitle = new javax.swing.JTextField();
         txtAuthor = new javax.swing.JTextField();
         txtGenre = new javax.swing.JTextField();
-        jTextField6 = new javax.swing.JTextField();
+        txtPublicationDate = new javax.swing.JTextField();
         txtLength = new javax.swing.JTextField();
         txtAlternativeTitle = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
@@ -81,6 +83,14 @@ public class LibraryBooks extends javax.swing.JFrame
         jButton1.setText("jButton1");
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, -1, 60));
         getContentPane().add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 440, 1170, 10));
+
+        txtPublisher.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                txtPublisherActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Publication Date");
 
@@ -147,11 +157,11 @@ public class LibraryBooks extends javax.swing.JFrame
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
-                        .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txtPublicationDate, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(80, 80, 80)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(10, 10, 10)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txtPublisher, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(190, 190, 190)
                         .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -187,9 +197,9 @@ public class LibraryBooks extends javax.swing.JFrame
                 .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtPublicationDate, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txtPublisher, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(30, 30, 30)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(39, Short.MAX_VALUE))
@@ -207,6 +217,11 @@ public class LibraryBooks extends javax.swing.JFrame
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void txtPublisherActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtPublisherActionPerformed
+    {//GEN-HEADEREND:event_txtPublisherActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPublisherActionPerformed
 
     /**
      * @param args the command line arguments
@@ -272,8 +287,6 @@ public class LibraryBooks extends javax.swing.JFrame
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField6;
     private javax.swing.JLabel lblPicture;
     private javax.swing.JTextField txISB;
     private javax.swing.JTextField txtAlternativeTitle;
@@ -281,6 +294,8 @@ public class LibraryBooks extends javax.swing.JFrame
     private javax.swing.JTextField txtCopies;
     private javax.swing.JTextField txtGenre;
     private javax.swing.JTextField txtLength;
+    private javax.swing.JTextField txtPublicationDate;
+    private javax.swing.JTextField txtPublisher;
     private javax.swing.JTextField txtTitle;
     // End of variables declaration//GEN-END:variables
 }

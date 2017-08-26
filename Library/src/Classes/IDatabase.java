@@ -9,16 +9,11 @@ package Classes;
  *
  * @author jncor
  */
-public class BookType
+public interface IDatabase
 {
-    private String id;
-    private String name;
-    
-    BookType()
-    {
-        
-    }
-    
-    public String getID() { return id; }
-    public String getName() { return name; }
+
+    /**
+     * Used to get Data from the database to the specific classes
+     */
+    void GetData();
 }

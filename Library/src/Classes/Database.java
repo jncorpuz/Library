@@ -16,14 +16,14 @@ import javax.swing.JOptionPane;
 public class Database
 {
     //Local Connection Details
-    //private static final String connectionStr = "jdbc:mysql://DESKTOP-B322RD1:3306/test?user=noel&password=Wve0Gb49tHt89QHB";
-    //private static final String username = "noel";
-    //private static final String password = "Wve0Gb49tHt89QHB";
+    private static final String connectionStr = "jdbc:mysql://DESKTOP-B322RD1:3306/library";
+    private static final String username = "library";
+    private static final String password = "x0zKfKOUuNzIWSwI";
     
     //Online Database Connection Details
-    private static final String connectionStr = "jdbc:mysql://db4free.net:3306/libraryjava";
-    private static final String username = "libraryjava";
-    private static final String password = "x0zKfKOUuNzIWSwI";
+    //private static final String connectionStr = "jdbc:mysql://db4free.net:3306/libraryjava";
+    //private static final String username = "libraryjava";
+    //private static final String password = "x0zKfKOUuNzIWSwI";
     
     /**
      *
@@ -71,5 +71,10 @@ public class Database
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
         return null;
+    }
+    
+    public static Connection DBConnection() throws SQLException
+    {
+        return DriverManager.getConnection(connectionStr, username, password);
     }
 }

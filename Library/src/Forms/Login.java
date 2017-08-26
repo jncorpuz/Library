@@ -1,9 +1,12 @@
+package Forms;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
+import Classes.*;
+import javax.swing.JOptionPane;
 /**
  *
  * @author jncor
@@ -105,12 +108,46 @@ public class Login extends javax.swing.JFrame
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdLoginActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdLoginActionPerformed
     {//GEN-HEADEREND:event_cmdLoginActionPerformed
         // TODO add your handling code here:
         String username = txtUsername.getText();
+        String password = txtPassword.getText();
+        
+        User user = new User(username);
+        int responseCode = user.Login(password);
+        
+        switch (responseCode)
+        {
+            case 1:
+                {
+                    AdminMenu menu = new AdminMenu(user.getID());
+                    menu.setVisible(true);
+                    this.setVisible(false);
+                    break;
+                }
+            case 2:
+                {
+                    BorrowerMenu menu = new BorrowerMenu(user.getID());
+                    menu.setVisible(true);
+                    this.setVisible(false);
+                    break;
+                }
+            case 3:
+                JOptionPane.showMessageDialog(this, "Invalid Password");
+                break;
+            case 4:
+                JOptionPane.showMessageDialog(this, "User does not exist");
+                break;
+            case 0:
+                JOptionPane.showMessageDialog(this, "Error");
+                break;
+            default:
+                break;
+        }
         
     }//GEN-LAST:event_cmdLoginActionPerformed
 
