@@ -47,27 +47,49 @@ public class AdminMenu extends javax.swing.JFrame
         cmdAccountManagement = new javax.swing.JButton();
         cmdReports = new javax.swing.JButton();
         cmdLogout = new javax.swing.JButton();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cmdBorrowBook.setText("Borrow Book");
         cmdBorrowBook.setMaximumSize(new java.awt.Dimension(91, 24));
         cmdBorrowBook.setMinimumSize(new java.awt.Dimension(91, 24));
+        cmdBorrowBook.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cmdBorrowBookActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmdBorrowBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 130, 50));
 
         cmdReturnBook.setText("Return Book");
         cmdReturnBook.setMaximumSize(new java.awt.Dimension(91, 24));
         cmdReturnBook.setMinimumSize(new java.awt.Dimension(91, 24));
+        jPanel1.add(cmdReturnBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 130, 50));
 
         cmdAddBook.setText("Add Book");
         cmdAddBook.setMaximumSize(new java.awt.Dimension(91, 24));
         cmdAddBook.setMinimumSize(new java.awt.Dimension(91, 24));
+        jPanel1.add(cmdAddBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 130, 50));
 
         cmdViewBooks.setText("View Books");
         cmdViewBooks.setMaximumSize(new java.awt.Dimension(91, 24));
         cmdViewBooks.setMinimumSize(new java.awt.Dimension(91, 24));
+        cmdViewBooks.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cmdViewBooksActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmdViewBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 130, 50));
 
         cmdPenaltyRecords.setText("Penalty Records");
         cmdPenaltyRecords.setMaximumSize(new java.awt.Dimension(91, 24));
@@ -79,18 +101,23 @@ public class AdminMenu extends javax.swing.JFrame
                 cmdPenaltyRecordsActionPerformed(evt);
             }
         });
+        jPanel1.add(cmdPenaltyRecords, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 200, 130, 50));
 
         cmdHolidayManagement.setLabel("<html>Holiday<br>Management</html>");
         cmdHolidayManagement.setMaximumSize(new java.awt.Dimension(91, 24));
         cmdHolidayManagement.setMinimumSize(new java.awt.Dimension(91, 24));
+        jPanel1.add(cmdHolidayManagement, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 130, 50));
 
         cmdMessages.setText("Messages");
         cmdMessages.setMaximumSize(new java.awt.Dimension(91, 24));
         cmdMessages.setMinimumSize(new java.awt.Dimension(91, 24));
+        jPanel1.add(cmdMessages, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 200, 130, 50));
 
         cmdAccountManagement.setLabel("<html></center>Account<br>Management</center></html>");
         cmdAccountManagement.setMaximumSize(new java.awt.Dimension(91, 24));
         cmdAccountManagement.setMinimumSize(new java.awt.Dimension(91, 24));
+        jPanel1.add(cmdAccountManagement, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 130, 130, 50));
+        cmdAccountManagement.getAccessibleContext().setAccessibleName("<html>Account<br>Management</html>");
 
         cmdReports.setText("Reports");
         cmdReports.setMaximumSize(new java.awt.Dimension(91, 24));
@@ -102,6 +129,7 @@ public class AdminMenu extends javax.swing.JFrame
                 cmdReportsActionPerformed(evt);
             }
         });
+        jPanel1.add(cmdReports, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 250, 130, 50));
 
         cmdLogout.setText("Logout");
         cmdLogout.setMaximumSize(new java.awt.Dimension(91, 24));
@@ -113,63 +141,10 @@ public class AdminMenu extends javax.swing.JFrame
                 cmdLogoutActionPerformed(evt);
             }
         });
+        jPanel1.add(cmdLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 250, 130, 50));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cmdBorrowBook, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmdReturnBook, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cmdAddBook, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmdViewBooks, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cmdPenaltyRecords, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmdHolidayManagement, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cmdMessages, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmdAccountManagement, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cmdReports, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cmdLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(319, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmdBorrowBook, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmdReturnBook, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmdAddBook, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmdViewBooks, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmdPenaltyRecords, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmdHolidayManagement, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(cmdMessages, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmdAccountManagement, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cmdReports, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cmdLogout, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(12, Short.MAX_VALUE))
-        );
-
-        cmdAccountManagement.getAccessibleContext().setAccessibleName("<html>Account<br>Management</html>");
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 290, 310));
+        getContentPane().add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(290, 0, 460, 310));
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -178,23 +153,6 @@ public class AdminMenu extends javax.swing.JFrame
         jMenuBar1.add(jMenu2);
 
         setJMenuBar(jMenuBar1);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -218,10 +176,25 @@ public class AdminMenu extends javax.swing.JFrame
     private void cmdPenaltyRecordsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdPenaltyRecordsActionPerformed
     {//GEN-HEADEREND:event_cmdPenaltyRecordsActionPerformed
         // TODO add your handling code here:
-        PenaltyRecords form = new PenaltyRecords();
-        form.setVisible(true);
-        this.setVisible(false);
+        //PenaltyRecords form = new PenaltyRecords();
+        //form.setVisible(true);
+        //this.setVisible(false);
     }//GEN-LAST:event_cmdPenaltyRecordsActionPerformed
+
+    private void cmdViewBooksActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdViewBooksActionPerformed
+    {//GEN-HEADEREND:event_cmdViewBooksActionPerformed
+        // TODO add your handling code here:
+        LibraryBooks form = new LibraryBooks();
+        form.cmdPlaceHold.setVisible(false);
+        form.cmdLendBook.setVisible(true);
+        form.setVisible(true);
+        this.setEnabled(false);
+    }//GEN-LAST:event_cmdViewBooksActionPerformed
+
+    private void cmdBorrowBookActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdBorrowBookActionPerformed
+    {//GEN-HEADEREND:event_cmdBorrowBookActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmdBorrowBookActionPerformed
 
     /**
      * @param args the command line arguments
@@ -279,6 +252,7 @@ public class AdminMenu extends javax.swing.JFrame
     private javax.swing.JButton cmdReports;
     private javax.swing.JButton cmdReturnBook;
     private javax.swing.JButton cmdViewBooks;
+    private javax.swing.Box.Filler filler1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;

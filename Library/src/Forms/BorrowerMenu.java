@@ -38,49 +38,34 @@ public class BorrowerMenu extends javax.swing.JFrame
     private void initComponents()
     {
 
-        cmdLogout = new java.awt.Button();
-        cmdLibraryBooks = new java.awt.Button();
-        cmdBorrowedBooks = new java.awt.Button();
-        cmdMessages = new java.awt.Button();
-        cmdAccountSettings = new java.awt.Button();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        cmdLogout = new javax.swing.JButton();
+        cmdLibraryBooks = new javax.swing.JButton();
+        cmdBorrowedBooks = new javax.swing.JButton();
+        cmdMessages = new javax.swing.JButton();
+        cmdSettings = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 480, 250));
 
-        cmdLogout.setLabel("Logout");
-        cmdLogout.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                cmdLogoutActionPerformed(evt);
-            }
-        });
+        cmdLogout.setText("Logout");
         getContentPane().add(cmdLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 130, 50));
 
-        cmdLibraryBooks.setLabel("Library Books");
-        cmdLibraryBooks.setName(""); // NOI18N
-        cmdLibraryBooks.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
-                cmdLibraryBooksActionPerformed(evt);
-            }
-        });
+        cmdLibraryBooks.setText("Library Books");
         getContentPane().add(cmdLibraryBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 50));
 
-        cmdBorrowedBooks.setLabel("My Borrowed Books");
+        cmdBorrowedBooks.setText("My Borrowed Books");
         getContentPane().add(cmdBorrowedBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 130, 50));
 
-        cmdMessages.setLabel("My Messages");
+        cmdMessages.setText("My Messages");
         getContentPane().add(cmdMessages, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 130, 50));
 
-        cmdAccountSettings.setLabel("Account Settings");
-        getContentPane().add(cmdAccountSettings, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 130, 50));
-        getContentPane().add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 480, 250));
+        cmdSettings.setText("Account Settings");
+        getContentPane().add(cmdSettings, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 130, 50));
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -92,22 +77,6 @@ public class BorrowerMenu extends javax.swing.JFrame
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void cmdLibraryBooksActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdLibraryBooksActionPerformed
-    {//GEN-HEADEREND:event_cmdLibraryBooksActionPerformed
-        // TODO add your handling code here:
-        LibraryBooks form = new LibraryBooks();
-        form.setVisible(true);
-        
-    }//GEN-LAST:event_cmdLibraryBooksActionPerformed
-
-    private void cmdLogoutActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdLogoutActionPerformed
-    {//GEN-HEADEREND:event_cmdLogoutActionPerformed
-        // TODO add your handling code here:
-        Login form = new Login();
-        form.setVisible(true);
-        this.setVisible(false);
-    }//GEN-LAST:event_cmdLogoutActionPerformed
 
     /**
      * @param args the command line arguments
@@ -155,11 +124,11 @@ public class BorrowerMenu extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private java.awt.Button cmdAccountSettings;
-    private java.awt.Button cmdBorrowedBooks;
-    private java.awt.Button cmdLibraryBooks;
-    private java.awt.Button cmdLogout;
-    private java.awt.Button cmdMessages;
+    private javax.swing.JButton cmdBorrowedBooks;
+    private javax.swing.JButton cmdLibraryBooks;
+    private javax.swing.JButton cmdLogout;
+    private javax.swing.JButton cmdMessages;
+    private javax.swing.JButton cmdSettings;
     private javax.swing.Box.Filler filler1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
