@@ -5,6 +5,8 @@
  */
 package Classes;
 
+import java.sql.*;
+
 /**
  *
  * @author jncor
@@ -21,10 +23,10 @@ public class BookInfo
     private String yearReleased;
     private String publicationInfo;
     
-    BookInfo(String bookISBN)
+    BookInfo(String isbn)
     {
-        isbn = bookISBN;
-        //Execute Select Method
+        this.isbn = isbn;
+        GetBookInfo();
     }
     
     public String getISBN() { return isbn; }
@@ -36,5 +38,20 @@ public class BookInfo
     public String getAlternateTitles() { return alternateTitles; }
     public String getYearReleased() { return yearReleased; }
     public String getPublicationInfo() { return publicationInfo; }
+    
+    public void GetBookInfo() throws SQLException
+    {
+        ResultSet bookInfo = Database.ExecuteQuery("select * from bookinfo where isbn='" + this.isbn + "';");
+        
+        this.title = bookInfo.getString("title");
+        this.author.setFirstName(null);
+        this.author.setLastName(null);
+        //set booktype
+        this.summary = bookInfo.getString("summary");
+        this.length = bookInfo.getString("length");
+        this.alternateTitles = bookInfo.getString("alternateTitle");
+        this.yearReleased = bookInfo.getString("yearReleased");
+        this.publicationInfo = bookInfo.getString("publicationInfo");
+    }
 }
 
