@@ -4,13 +4,14 @@
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
             <file>file:/C:/Users/jncor/Documents/GitHub/Library/Library/src/Classes/Book.java</file>
+            <file>file:/C:/Users/jncor/Documents/GitHub/Library/Library/src/Login.java</file>
             <file>file:/C:/Users/jncor/Documents/GitHub/Library/Library/src/Classes/Database.java</file>
             <file>file:/C:/Users/jncor/Documents/GitHub/Library/Library/src/InitialClass.java</file>
             <file>file:/C:/Users/jncor/Documents/GitHub/Library/Library/src/Classes/Author.java</file>
             <file>file:/C:/Users/jncor/Documents/GitHub/Library/Library/src/Classes/BookInfo.java</file>
-            <file>file:/C:/Users/jncor/Documents/GitHub/Library/Library/src/AddBooks.java</file>
             <file>file:/C:/Users/jncor/Documents/GitHub/Library/Library/src/Classes/Person.java</file>
-            <file>file:/C:/Users/jncor/Documents/GitHub/Library/Library/src/PenaltyRecords.java</file>
+            <file>file:/C:/Users/jncor/Documents/GitHub/Library/Library/src/BorrowerMenu.java</file>
+            <file>file:/C:/Users/jncor/Documents/GitHub/Library/Library/src/LibraryBooks.java</file>
         </group>
     </open-files>
 </project-private>

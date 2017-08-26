@@ -5,6 +5,8 @@
  */
 package Classes;
 
+import java.sql.SQLException;
+
 /**
  *
  * @author jncor
@@ -15,7 +17,7 @@ public class Book extends BookInfo
     private Shelf shelf;
     private boolean isBorrowed;
     
-    public Book(String bookISBN)
+    public Book(String bookISBN) throws SQLException
     {
         super(bookISBN);
     }

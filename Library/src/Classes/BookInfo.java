@@ -23,7 +23,7 @@ public class BookInfo
     private String yearReleased;
     private String publicationInfo;
     
-    BookInfo(String isbn)
+    BookInfo(String isbn) throws SQLException
     {
         this.isbn = isbn;
         GetBookInfo();
@@ -41,7 +41,8 @@ public class BookInfo
     
     public void GetBookInfo() throws SQLException
     {
-        ResultSet bookInfo = Database.ExecuteQuery("select * from bookinfo where isbn='" + this.isbn + "';");
+        String sqlStatement = "select * from bookinfo where isbn='" + this.isbn + "';";
+        ResultSet bookInfo = Database.ExecuteQuery(sqlStatement);
         
         this.title = bookInfo.getString("title");
         this.author.setFirstName(null);
