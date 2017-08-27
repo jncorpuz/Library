@@ -74,14 +74,17 @@ public class BookInfo implements IDatabase
 
     /**
      *
+     * @param isbn
+     * @param title
+     * @param author
+     * @param genre
      * @return Table with searched data
      */
-    @Override
-    public JTable SearchData()
+    public JTable SearchData(String isbn, String title, String author, String genre)
     {
         try
         {
-            String sqlStatement = "select bookinfo.isbn, bookinfo.title, bookinfo.author, shelf.shelfName from bookinfo, shelf where isbn='" + this.isbn + "';";
+            String sqlStatement = "SELECT bookinfo.isbn, bookinfo.title, bookinfo.author, shelf.shelfName from bookinfo, shelf, genre where bookinfo.shelfID=shelf.id and bookinfo.genreID=genre.id and bookinfo.isbn like '%" + isbn + "%' and bookinfo.title like '%" + title + "%' and bookinfo.author like '%" + author + "%' and genre.genreName like '%" + genre + "%';";
             Connection dbCon = Database.DBConnection();
             Statement dbCom = dbCon.createStatement();
             ResultSet bookInfo = dbCom.executeQuery(sqlStatement);
@@ -102,6 +105,12 @@ public class BookInfo implements IDatabase
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
         return null;
+    }
+
+    @Override
+    public JTable SearchData()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
 
