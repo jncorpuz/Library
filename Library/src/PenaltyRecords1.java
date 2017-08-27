@@ -15,13 +15,13 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author jncor
  */
-public class PenaltyRecords extends javax.swing.JFrame
+public class PenaltyRecords1 extends javax.swing.JFrame
 {
 
     /**
      * Creates new form PenaltyRecords
      */
-    public PenaltyRecords()
+    public PenaltyRecords1()
     {
         initComponents();
     }
@@ -33,7 +33,8 @@ public class PenaltyRecords extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
@@ -61,21 +62,26 @@ public class PenaltyRecords extends javax.swing.JFrame
         jPanel1.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, 210, 50));
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "ISBN", "Title", "Length of Books", "Days OverDue:", "Amount"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
+        )
+        {
+            boolean[] canEdit = new boolean []
+            {
                 false, false, false, false, false
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
@@ -94,21 +100,26 @@ public class PenaltyRecords extends javax.swing.JFrame
         jLabel3.setText("Your Borrowed Books:");
 
         jTable2.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "ISBN", "Title", "Author", "Book Type", "Length"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
+        )
+        {
+            boolean[] canEdit = new boolean []
+            {
                 false, false, false, true, false
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
@@ -140,7 +151,8 @@ public class PenaltyRecords extends javax.swing.JFrame
         jTabbedPane1.addTab("Summary of  Borrowed Books", jPanel3);
 
         jtAdminPenaltyRecord.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {"1", "12435364734", "TheBird", "1", "4", "20"},
                 {"2", "232", "Shimmer", null, null, null},
                 {"3", null, null, null, null, null},
@@ -148,12 +160,15 @@ public class PenaltyRecords extends javax.swing.JFrame
                 {null, null, null, null, null, null},
                 {null, null, null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "UserID", "ISBN", "Title", "Length of Books", "Days OverDue:", "Amount"
             }
         ));
-        jtAdminPenaltyRecord.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        jtAdminPenaltyRecord.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 jtAdminPenaltyRecordMouseClicked(evt);
             }
         });
@@ -163,8 +178,10 @@ public class PenaltyRecords extends javax.swing.JFrame
         jLabel4.setText("Overdue Books:");
 
         jBtnRemove.setText("Verify Payment");
-        jBtnRemove.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jBtnRemove.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jBtnRemoveActionPerformed(evt);
             }
         });
@@ -267,17 +284,18 @@ public class PenaltyRecords extends javax.swing.JFrame
             }
         } catch (ClassNotFoundException ex)
         {
-            java.util.logging.Logger.getLogger(PenaltyRecords.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PenaltyRecords1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex)
         {
-            java.util.logging.Logger.getLogger(PenaltyRecords.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PenaltyRecords1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex)
         {
-            java.util.logging.Logger.getLogger(PenaltyRecords.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PenaltyRecords1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex)
         {
-            java.util.logging.Logger.getLogger(PenaltyRecords.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(PenaltyRecords1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -285,7 +303,7 @@ public class PenaltyRecords extends javax.swing.JFrame
         {
             public void run()
             {
-                new PenaltyRecords().setVisible(true);
+                new PenaltyRecords1().setVisible(true);
                
             }
         });

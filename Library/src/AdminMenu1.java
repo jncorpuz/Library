@@ -10,10 +10,10 @@
  */
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
-public class AdminMenu extends javax.swing.JFrame {
+public class AdminMenu1 extends javax.swing.JFrame {
 
     /** Creates new form NewJFrame1 */
-    public AdminMenu() {
+    public AdminMenu1() {
         initComponents();
     }
 
@@ -24,7 +24,8 @@ public class AdminMenu extends javax.swing.JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jTabbedPane1 = new javax.swing.JTabbedPane();
         jPanel2 = new javax.swing.JPanel();
@@ -46,7 +47,8 @@ public class AdminMenu extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jtAdminPenaltyRecord.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {"1", "12435364734", "TheBird", null, "1", "4", "20"},
                 {"2", "232", "Shimmer", null, null, null, null},
                 {"3", null, null, null, null, null, null},
@@ -54,12 +56,15 @@ public class AdminMenu extends javax.swing.JFrame {
                 {null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "UserID", "ISBN", "Title", "GenreID", "Length of Books", "Days OverDue:", "Amount"
             }
         ));
-        jtAdminPenaltyRecord.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
+        jtAdminPenaltyRecord.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
                 jtAdminPenaltyRecordMouseClicked(evt);
             }
         });
@@ -69,8 +74,10 @@ public class AdminMenu extends javax.swing.JFrame {
         jLabel4.setText("Penalty Records:");
 
         jBtnRemove.setText("Verify Payment");
-        jBtnRemove.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jBtnRemove.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 jBtnRemoveActionPerformed(evt);
             }
         });
@@ -107,26 +114,32 @@ public class AdminMenu extends javax.swing.JFrame {
         jTabbedPane1.addTab("Borrower'sPenaltyRecord", jPanel2);
 
         jtBorrowedBooks.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null},
                 {null, null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "UserID", "BookID", "LastName", "Title", "DueDate"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
+        )
+        {
+            boolean[] canEdit = new boolean []
+            {
                 false, false, true, false, false
             };
 
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
+            public boolean isCellEditable(int rowIndex, int columnIndex)
+            {
                 return canEdit [columnIndex];
             }
         });
         jScrollPane5.setViewportView(jtBorrowedBooks);
-        if (jtBorrowedBooks.getColumnModel().getColumnCount() > 0) {
+        if (jtBorrowedBooks.getColumnModel().getColumnCount() > 0)
+        {
             jtBorrowedBooks.getColumnModel().getColumn(4).setResizable(false);
         }
 
@@ -170,13 +183,15 @@ public class AdminMenu extends javax.swing.JFrame {
         jTabbedPane1.addTab("List of BorrowedBooks", jPanel6);
 
         jtAvailBooks.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "ISBN", "Title", "GenreID", "Status(A/U)"
             }
         ));
@@ -273,21 +288,23 @@ public class AdminMenu extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AdminMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminMenu1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AdminMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminMenu1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AdminMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminMenu1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AdminMenu.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(AdminMenu1.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
+        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdminMenu().setVisible(true);
+                new AdminMenu1().setVisible(true);
             }
         });
     }
