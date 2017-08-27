@@ -7,6 +7,8 @@ package Classes;
 
 import java.sql.*;
 import javax.swing.JOptionPane;
+import javax.swing.*;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -45,20 +47,20 @@ public class BookInfo implements IDatabase
     {
         try
         {
-        String sqlStatement = "select * from bookinfo where isbn='" + this.isbn + "';";
-        Connection dbCon = Database.DBConnection();
-        Statement dbCom = dbCon.createStatement();
-        ResultSet bookInfo = dbCom.executeQuery(sqlStatement);
-        
-        this.title = bookInfo.getString("title");
-        this.author.setFirstName(null);
-        this.author.setLastName(null);
-        this.genre = new Genre(bookInfo.getString("genreID"));
-        this.summary = bookInfo.getString("summary");
-        this.length = bookInfo.getString("length");
-        this.alternateTitles = bookInfo.getString("alternateTitle");
-        this.yearReleased = bookInfo.getString("yearReleased");
-        this.publicationInfo = bookInfo.getString("publicationInfo");
+            String sqlStatement = "select * from bookinfo where isbn='" + this.isbn + "';";
+            Connection dbCon = Database.DBConnection();
+            Statement dbCom = dbCon.createStatement();
+            ResultSet bookInfo = dbCom.executeQuery(sqlStatement);
+
+            this.title = bookInfo.getString("title");
+            this.author.setFirstName(null);
+            this.author.setLastName(null);
+            this.genre = new Genre(bookInfo.getString("genreID"));
+            this.summary = bookInfo.getString("summary");
+            this.length = bookInfo.getString("length");
+            this.alternateTitles = bookInfo.getString("alternateTitle");
+            this.yearReleased = bookInfo.getString("yearReleased");
+            this.publicationInfo = bookInfo.getString("publicationInfo");
         }
         catch (SQLException e)
         {
@@ -68,6 +70,38 @@ public class BookInfo implements IDatabase
         {
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
+    }
+
+    /**
+     *
+     * @return Table with searched data
+     */
+    @Override
+    public JTable SearchData()
+    {
+        try
+        {
+            String sqlStatement = "select bookinfo.isbn, bookinfo.title, bookinfo.author, shelf.shelfName from bookinfo, shelf where isbn='" + this.isbn + "';";
+            Connection dbCon = Database.DBConnection();
+            Statement dbCom = dbCon.createStatement();
+            ResultSet bookInfo = dbCom.executeQuery(sqlStatement);
+
+            JTable tblBook = new JTable();
+            tblBook.setModel(DbUtils.resultSetToTableModel(bookInfo));
+            dbCom.close();
+            dbCon.close();
+            
+            return tblBook;
+        }
+        catch (SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        return null;
     }
 }
 

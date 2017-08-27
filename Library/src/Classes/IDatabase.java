@@ -5,6 +5,8 @@
  */
 package Classes;
 
+import javax.swing.JTable;
+
 /**
  *
  * @author jncor
@@ -16,4 +18,5 @@ public interface IDatabase
      * Used to get Data from the database to the specific classes
      */
     void GetData();
+    JTable SearchData();
 }

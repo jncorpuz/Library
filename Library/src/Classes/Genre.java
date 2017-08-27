@@ -7,6 +7,7 @@ package Classes;
 
 import java.sql.*;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 
 /**
  *
@@ -56,4 +57,11 @@ public class Genre implements IDatabase
             JOptionPane.showMessageDialog(null, e.getMessage());
         }
     }
+
+    @Override
+    public JTable SearchData()
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
 }
