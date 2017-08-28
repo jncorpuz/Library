@@ -35,8 +35,7 @@ public class BorrowerMenu extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         cmdLogout = new javax.swing.JButton();
@@ -56,6 +55,11 @@ public class BorrowerMenu extends javax.swing.JFrame
         getContentPane().add(cmdLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 130, 50));
 
         cmdLibraryBooks.setText("Library Books");
+        cmdLibraryBooks.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdLibraryBooksActionPerformed(evt);
+            }
+        });
         getContentPane().add(cmdLibraryBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 50));
 
         cmdBorrowedBooks.setText("My Borrowed Books");
@@ -77,6 +81,10 @@ public class BorrowerMenu extends javax.swing.JFrame
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void cmdLibraryBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLibraryBooksActionPerformed
+        
+    }//GEN-LAST:event_cmdLibraryBooksActionPerformed
 
     /**
      * @param args the command line arguments
