@@ -53,9 +53,9 @@
         <Property name="useNullLayout" type="boolean" value="false"/>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="cmdBorrowBook">
+        <Component class="javax.swing.JButton" name="cmdLendBook">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Borrow Book"/>
+            <Property name="text" type="java.lang.String" value="Lend Book"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[91, 24]"/>
             </Property>
@@ -64,7 +64,7 @@
             </Property>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdBorrowBookActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdLendBookActionPerformed"/>
           </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
@@ -93,7 +93,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="cmdAddBook">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Add Book"/>
+            <Property name="text" type="java.lang.String" value="Add Book Data"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[91, 24]"/>
             </Property>
@@ -101,6 +101,9 @@
               <Dimension value="[91, 24]"/>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cmdAddBookActionPerformed"/>
+          </Events>
           <Constraints>
             <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
               <AbsoluteConstraints x="10" y="60" width="130" height="50"/>
@@ -128,7 +131,7 @@
         </Component>
         <Component class="javax.swing.JButton" name="cmdPenaltyRecords">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Penalty Records"/>
+            <Property name="text" type="java.lang.String" value="&lt;html&gt;Penalty&lt;br&gt;Management&lt;/html&gt;"/>
             <Property name="maximumSize" type="java.awt.Dimension" editor="org.netbeans.beaninfo.editors.DimensionEditor">
               <Dimension value="[91, 24]"/>
             </Property>

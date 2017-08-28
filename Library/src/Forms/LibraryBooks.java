@@ -10,17 +10,32 @@ package Forms;
  *
  * @author jncor
  */
+import Classes.*;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.*;
+import net.proteanit.sql.DbUtils;
 public class LibraryBooks extends JFrame
 {
-    static JFrame backFrame;
+    private JFrame backFrame;
+    private String userID;
 
     /**
      * Creates new form LibraryBooks
+     * @param a
      */
-    public LibraryBooks(JFrame a)
+    public LibraryBooks(JFrame a, String userID)
     {
         backFrame = a;
+        this.userID = userID;
+        initComponents();
+    }
+    public LibraryBooks()
+    {
         initComponents();
     }
 
@@ -31,7 +46,8 @@ public class LibraryBooks extends JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jScrollPane1 = new javax.swing.JScrollPane();
         tbBooks = new javax.swing.JTable();
@@ -56,23 +72,34 @@ public class LibraryBooks extends JFrame
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         tbBooks.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tbBooks.addMouseListener(new java.awt.event.MouseAdapter()
+        {
+            public void mouseClicked(java.awt.event.MouseEvent evt)
+            {
+                tbBooksMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(tbBooks);
 
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 600, 270));
 
         cmdBack.setText("Back");
-        cmdBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cmdBack.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 cmdBackActionPerformed(evt);
             }
         });
@@ -99,9 +126,17 @@ public class LibraryBooks extends JFrame
         getContentPane().add(txtShelf, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 80, 100, -1));
 
         cmdSearch.setText("Search");
+        cmdSearch.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cmdSearchActionPerformed(evt);
+            }
+        });
         getContentPane().add(cmdSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 180, 80, 30));
 
         ddGenre.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ddGenre.setSelectedIndex(-1);
         getContentPane().add(ddGenre, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 110, 100, -1));
 
         jMenu1.setText("File");
@@ -113,12 +148,45 @@ public class LibraryBooks extends JFrame
         setJMenuBar(jMenuBar1);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBackActionPerformed
         backFrame.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_cmdBackActionPerformed
+
+    private void cmdSearchActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdSearchActionPerformed
+    {//GEN-HEADEREND:event_cmdSearchActionPerformed
+        try
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+            //String sqlStatement = "SELECT bookinfo.isbn, bookinfo.title, bookinfo.author, shelf.shelfName from bookinfo, shelf, genre where bookinfo.shelfID=shelf.id and bookinfo.genreID=genre.id and bookinfo.isbn like '%" + txtISBN.getText() + "%' and bookinfo.title like '%" + txtTitle.getText() + "%' and bookinfo.author like '%" + txtAuthor.getText() + "%' and genre.genreName like '%" + ddGenre.getSelectedItem().toString() + "%' and shelf.shelfName like '%" + txtShelf.getText() + "%';";
+            String sqlStatement = "SELECT bookinfo.isbn, bookinfo.title, bookinfo.author, shelf.shelfName from bookinfo, shelf, genre where bookinfo.shelfID=shelf.id and bookinfo.genreID=genre.id and bookinfo.isbn like '%%' and bookinfo.title like '%%' and bookinfo.author like '%%' and genre.genreName like '%%' and shelf.shelfName like '%%';";
+            //String sqlStatement = "SELECT bookinfo.isbn as ISBN, bookinfo.title as Title, bookinfo.author as Author, shelf.shelfName as Shelf from bookinfo, shelf WHERE bookinfo.shelfID=shelf.id and bookinfo.isbn like '%%' and bookinfo.title like '%%' and bookinfo.author like '%%' and shelf.shelfName like '%%';";
+            Connection dbCon = Database.DBConnection();
+            Statement dbCom = dbCon.createStatement();
+            ResultSet bookInfo = dbCom.executeQuery(sqlStatement);
+            
+            if (bookInfo.isBeforeFirst())
+                tbBooks.setModel(DbUtils.resultSetToTableModel(bookInfo));
+            
+            dbCom.close();
+            dbCon.close();
+        } catch (SQLException | ClassNotFoundException ex)
+        {
+            JOptionPane.showMessageDialog(null, ex.toString());
+        }
+    }//GEN-LAST:event_cmdSearchActionPerformed
+
+    private void tbBooksMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tbBooksMouseClicked
+    {//GEN-HEADEREND:event_tbBooksMouseClicked
+        // TODO add your handling code here:
+        LendBooks form = new LendBooks(this, tbBooks.getValueAt(tbBooks.getSelectedRow(), 0).toString());
+        form.setVisible(true);
+        this.setVisible(false);
+        
+    }//GEN-LAST:event_tbBooksMouseClicked
 
     /**
      * @param args the command line arguments
@@ -160,7 +228,7 @@ public class LibraryBooks extends JFrame
         {
             public void run()
             {
-                new LibraryBooks(backFrame).setVisible(true);
+                new LibraryBooks().setVisible(true);
             }
         });
     }

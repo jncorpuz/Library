@@ -115,7 +115,7 @@ public class BorrowerMenu1 extends javax.swing.JFrame {
         ));
         jScrollPane5.setViewportView(jtUserBorrowedBooks);
 
-        jPanel5.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+        jPanel5.add(jScrollPane5, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, 270));
 
         jLabel7.setText("My Borrowed Books:");
         jPanel5.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));

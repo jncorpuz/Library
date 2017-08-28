@@ -5,6 +5,14 @@
  */
 package Forms;
 
+import Classes.Database;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
+
 /**
  *
  * @author jncor
@@ -30,22 +38,188 @@ public class Reports extends javax.swing.JFrame
     private void initComponents()
     {
 
+        jLabel4 = new javax.swing.JLabel();
+        cmdBorrowedBooks = new javax.swing.JButton();
+        cmdPenaltyRecords = new javax.swing.JButton();
+        cmdLendBook2 = new javax.swing.JButton();
+        cmdLendBook3 = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tblReport = new javax.swing.JTable();
+        cmdLendBook4 = new javax.swing.JButton();
+
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        jLabel4.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        jLabel4.setText("Reports");
+
+        cmdBorrowedBooks.setText("Borrowed Books");
+        cmdBorrowedBooks.setMaximumSize(new java.awt.Dimension(91, 24));
+        cmdBorrowedBooks.setMinimumSize(new java.awt.Dimension(91, 24));
+        cmdBorrowedBooks.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cmdBorrowedBooksActionPerformed(evt);
+            }
+        });
+
+        cmdPenaltyRecords.setText("Penalty Records");
+        cmdPenaltyRecords.setMaximumSize(new java.awt.Dimension(91, 24));
+        cmdPenaltyRecords.setMinimumSize(new java.awt.Dimension(91, 24));
+        cmdPenaltyRecords.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cmdPenaltyRecordsActionPerformed(evt);
+            }
+        });
+
+        cmdLendBook2.setText("Lend Book");
+        cmdLendBook2.setMaximumSize(new java.awt.Dimension(91, 24));
+        cmdLendBook2.setMinimumSize(new java.awt.Dimension(91, 24));
+        cmdLendBook2.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cmdLendBook2ActionPerformed(evt);
+            }
+        });
+
+        cmdLendBook3.setText("Lend Book");
+        cmdLendBook3.setMaximumSize(new java.awt.Dimension(91, 24));
+        cmdLendBook3.setMinimumSize(new java.awt.Dimension(91, 24));
+        cmdLendBook3.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cmdLendBook3ActionPerformed(evt);
+            }
+        });
+
+        tblReport.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][]
+            {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String []
+            {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(tblReport);
+
+        cmdLendBook4.setText("Back");
+        cmdLendBook4.setMaximumSize(new java.awt.Dimension(91, 24));
+        cmdLendBook4.setMinimumSize(new java.awt.Dimension(91, 24));
+        cmdLendBook4.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cmdLendBook4ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 400, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(cmdLendBook4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(cmdBorrowedBooks, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmdPenaltyRecords, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmdLendBook2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cmdLendBook3, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 300, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(cmdLendBook4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(cmdPenaltyRecords, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmdLendBook2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmdLendBook3, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cmdBorrowedBooks, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(9, 9, 9)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 341, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void cmdBorrowedBooksActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdBorrowedBooksActionPerformed
+    {//GEN-HEADEREND:event_cmdBorrowedBooksActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_cmdBorrowedBooksActionPerformed
+
+    private void cmdPenaltyRecordsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdPenaltyRecordsActionPerformed
+    {//GEN-HEADEREND:event_cmdPenaltyRecordsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmdPenaltyRecordsActionPerformed
+
+    private void cmdLendBook2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdLendBook2ActionPerformed
+    {//GEN-HEADEREND:event_cmdLendBook2ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmdLendBook2ActionPerformed
+
+    private void cmdLendBook3ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdLendBook3ActionPerformed
+    {//GEN-HEADEREND:event_cmdLendBook3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmdLendBook3ActionPerformed
+
+    private void cmdLendBook4ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdLendBook4ActionPerformed
+    {//GEN-HEADEREND:event_cmdLendBook4ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmdLendBook4ActionPerformed
+
+    private void PopulateTable(String sqlStatement)
+    {
+        try
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+            //String sqlStatement = "SELECT bookinfo.isbn, bookinfo.title, bookinfo.author, shelf.shelfName from bookinfo, shelf, genre where bookinfo.shelfID=shelf.id and bookinfo.genreID=genre.id and bookinfo.isbn like '%" + txtISBN.getText() + "%' and bookinfo.title like '%" + txtTitle.getText() + "%' and bookinfo.author like '%" + txtAuthor.getText() + "%' and genre.genreName like '%" + ddGenre.getSelectedItem().toString() + "%' and shelf.shelfName like '%" + txtShelf.getText() + "%';";
+            //String sqlStatement = "SELECT bookinfo.isbn, bookinfo.title, bookinfo.author, shelf.shelfName from bookinfo, shelf, genre where bookinfo.shelfID=shelf.id and bookinfo.genreID=genre.id and bookinfo.isbn like '%%' and bookinfo.title like '%%' and bookinfo.author like '%%' and genre.genreName like '%%' and shelf.shelfName like '%%';";
+            //String sqlStatement = "SELECT bookinfo.isbn as ISBN, bookinfo.title as Title, bookinfo.author as Author, shelf.shelfName as Shelf from bookinfo, shelf WHERE bookinfo.shelfID=shelf.id and bookinfo.isbn like '%%' and bookinfo.title like '%%' and bookinfo.author like '%%' and shelf.shelfName like '%%';";
+            Connection dbCon = Database.DBConnection();
+            Statement dbCom = dbCon.createStatement();
+            ResultSet bookInfo = dbCom.executeQuery(sqlStatement);
+            
+            if (bookInfo.isBeforeFirst())
+                tblReport.setModel(DbUtils.resultSetToTableModel(bookInfo));
+            
+            dbCom.close();
+            dbCon.close();
+        } catch (SQLException | ClassNotFoundException ex)
+        {
+            JOptionPane.showMessageDialog(null, ex.toString());
+        }
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -92,5 +266,13 @@ public class Reports extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cmdBorrowedBooks;
+    private javax.swing.JButton cmdLendBook2;
+    private javax.swing.JButton cmdLendBook3;
+    private javax.swing.JButton cmdLendBook4;
+    private javax.swing.JButton cmdPenaltyRecords;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable tblReport;
     // End of variables declaration//GEN-END:variables
 }

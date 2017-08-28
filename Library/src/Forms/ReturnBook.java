@@ -16,12 +16,17 @@ public class ReturnBook extends JFrame {
      * Creates new form ReturnBook
      */
     static JFrame backFrame;
-    static String bookID,userID;
-    public ReturnBook(JFrame a, String uID,String bID) {
+    private String bookID,userID;
+    public ReturnBook(JFrame a, String uID, String bID) {
         backFrame = a;
         bookID = bID;
         userID = uID;
         initComponents();
+    }
+    
+    public ReturnBook()
+    {
+        
     }
 
     /**
@@ -145,7 +150,7 @@ public class ReturnBook extends JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ReturnBook(backFrame, userID, bookID).setVisible(true);
+                new ReturnBook().setVisible(true);
             }
         });
     }

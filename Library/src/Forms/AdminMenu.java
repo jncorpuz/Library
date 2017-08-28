@@ -33,10 +33,11 @@ public class AdminMenu extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jPanel1 = new javax.swing.JPanel();
-        cmdBorrowBook = new javax.swing.JButton();
+        cmdLendBook = new javax.swing.JButton();
         cmdReturnBook = new javax.swing.JButton();
         cmdAddBook = new javax.swing.JButton();
         cmdViewBooks = new javax.swing.JButton();
@@ -56,46 +57,61 @@ public class AdminMenu extends javax.swing.JFrame
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        cmdBorrowBook.setText("Borrow Book");
-        cmdBorrowBook.setMaximumSize(new java.awt.Dimension(91, 24));
-        cmdBorrowBook.setMinimumSize(new java.awt.Dimension(91, 24));
-        cmdBorrowBook.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdBorrowBookActionPerformed(evt);
+        cmdLendBook.setText("Lend Book");
+        cmdLendBook.setMaximumSize(new java.awt.Dimension(91, 24));
+        cmdLendBook.setMinimumSize(new java.awt.Dimension(91, 24));
+        cmdLendBook.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cmdLendBookActionPerformed(evt);
             }
         });
-        jPanel1.add(cmdBorrowBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 130, 50));
+        jPanel1.add(cmdLendBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 130, 50));
 
         cmdReturnBook.setText("Return Book");
         cmdReturnBook.setMaximumSize(new java.awt.Dimension(91, 24));
         cmdReturnBook.setMinimumSize(new java.awt.Dimension(91, 24));
-        cmdReturnBook.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cmdReturnBook.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 cmdReturnBookActionPerformed(evt);
             }
         });
         jPanel1.add(cmdReturnBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 130, 50));
 
-        cmdAddBook.setText("Add Book");
+        cmdAddBook.setText("Add Book Data");
         cmdAddBook.setMaximumSize(new java.awt.Dimension(91, 24));
         cmdAddBook.setMinimumSize(new java.awt.Dimension(91, 24));
+        cmdAddBook.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cmdAddBookActionPerformed(evt);
+            }
+        });
         jPanel1.add(cmdAddBook, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 130, 50));
 
         cmdViewBooks.setText("View Books");
         cmdViewBooks.setMaximumSize(new java.awt.Dimension(91, 24));
         cmdViewBooks.setMinimumSize(new java.awt.Dimension(91, 24));
-        cmdViewBooks.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cmdViewBooks.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 cmdViewBooksActionPerformed(evt);
             }
         });
         jPanel1.add(cmdViewBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 130, 50));
 
-        cmdPenaltyRecords.setText("Penalty Records");
+        cmdPenaltyRecords.setText("<html>Penalty<br>Management</html>");
         cmdPenaltyRecords.setMaximumSize(new java.awt.Dimension(91, 24));
         cmdPenaltyRecords.setMinimumSize(new java.awt.Dimension(91, 24));
-        cmdPenaltyRecords.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cmdPenaltyRecords.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 cmdPenaltyRecordsActionPerformed(evt);
             }
         });
@@ -120,8 +136,10 @@ public class AdminMenu extends javax.swing.JFrame
         cmdReports.setText("Reports");
         cmdReports.setMaximumSize(new java.awt.Dimension(91, 24));
         cmdReports.setMinimumSize(new java.awt.Dimension(91, 24));
-        cmdReports.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cmdReports.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 cmdReportsActionPerformed(evt);
             }
         });
@@ -130,8 +148,10 @@ public class AdminMenu extends javax.swing.JFrame
         cmdLogout.setText("Logout");
         cmdLogout.setMaximumSize(new java.awt.Dimension(91, 24));
         cmdLogout.setMinimumSize(new java.awt.Dimension(91, 24));
-        cmdLogout.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cmdLogout.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 cmdLogoutActionPerformed(evt);
             }
         });
@@ -179,19 +199,32 @@ public class AdminMenu extends javax.swing.JFrame
     private void cmdViewBooksActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdViewBooksActionPerformed
     {//GEN-HEADEREND:event_cmdViewBooksActionPerformed
         // TODO add your handling code here:
-        LibraryBooks librarybooks = new LibraryBooks(this);
+        LibraryBooks librarybooks = new LibraryBooks(this, this.userID);
         librarybooks.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_cmdViewBooksActionPerformed
 
-    private void cmdBorrowBookActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdBorrowBookActionPerformed
-    {//GEN-HEADEREND:event_cmdBorrowBookActionPerformed
+    private void cmdLendBookActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdLendBookActionPerformed
+    {//GEN-HEADEREND:event_cmdLendBookActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cmdBorrowBookActionPerformed
+        LendBooks form = new LendBooks(this, userID);
+        form.setVisible(true);
+        //this.setVisible(false);
+    }//GEN-LAST:event_cmdLendBookActionPerformed
 
     private void cmdReturnBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdReturnBookActionPerformed
-        
+        ReturnMenu form = new ReturnMenu(this);
+        form.setVisible(true);
+        this.setEnabled(false);
     }//GEN-LAST:event_cmdReturnBookActionPerformed
+
+    private void cmdAddBookActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdAddBookActionPerformed
+    {//GEN-HEADEREND:event_cmdAddBookActionPerformed
+        // TODO add your handling code here:
+        AddBooks form = new AddBooks(this);
+        form.setVisible(true);
+        this.setEnabled(false);
+    }//GEN-LAST:event_cmdAddBookActionPerformed
 
     /**
      * @param args the command line arguments
@@ -241,8 +274,8 @@ public class AdminMenu extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdAccountManagement;
     private javax.swing.JButton cmdAddBook;
-    private javax.swing.JButton cmdBorrowBook;
     private javax.swing.JButton cmdHolidayManagement;
+    private javax.swing.JButton cmdLendBook;
     private javax.swing.JButton cmdLogout;
     private javax.swing.JButton cmdMessages;
     private javax.swing.JButton cmdPenaltyRecords;

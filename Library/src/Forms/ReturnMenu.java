@@ -5,7 +5,14 @@
  */
 package Forms;
 
+import Classes.Database;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -29,7 +36,8 @@ public class ReturnMenu extends JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         cmdBack = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -37,50 +45,126 @@ public class ReturnMenu extends JFrame {
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         jLabel1 = new javax.swing.JLabel();
         txtUsername = new javax.swing.JTextField();
+        cmdReturn = new javax.swing.JButton();
         cmdSearch = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setAlwaysOnTop(true);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowClosing(java.awt.event.WindowEvent evt)
+            {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cmdBack.setText("Back");
-        cmdBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cmdBack.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 cmdBackActionPerformed(evt);
             }
         });
         getContentPane().add(cmdBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 11, 57, 51));
 
         tableReturn.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
+            new Object [][]
+            {
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null}
             },
-            new String [] {
+            new String []
+            {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
         jScrollPane1.setViewportView(tableReturn);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 380, 210));
-        getContentPane().add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 360, 400, 10));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 150, 380, 180));
+        getContentPane().add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 400, 10));
 
         jLabel1.setText("Username");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 50, 20));
         getContentPane().add(txtUsername, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 90, -1));
 
+        cmdReturn.setText("Return");
+        cmdReturn.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cmdReturnActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cmdReturn, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 340, 80, 30));
+
         cmdSearch.setText("Search");
-        getContentPane().add(cmdSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 110, 80, 30));
+        cmdSearch.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cmdSearchActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cmdSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 80, 30));
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBackActionPerformed
-        backFrame.setVisible(true);
-        this.dispose();
+        CloseForm();
     }//GEN-LAST:event_cmdBackActionPerformed
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
+    {//GEN-HEADEREND:event_formWindowClosing
+        // TODO add your handling code here:
+        CloseForm();
+    }//GEN-LAST:event_formWindowClosing
+
+    private void cmdReturnActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdReturnActionPerformed
+    {//GEN-HEADEREND:event_cmdReturnActionPerformed
+        // TODO add your handling code here:
+        
+        
+    }//GEN-LAST:event_cmdReturnActionPerformed
+
+    private void cmdSearchActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdSearchActionPerformed
+    {//GEN-HEADEREND:event_cmdSearchActionPerformed
+        // TODO add your handling code here:
+        try
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+            //String sqlStatement = "SELECT bookinfo.isbn, bookinfo.title, bookinfo.author, shelf.shelfName from bookinfo, shelf, genre where bookinfo.shelfID=shelf.id and bookinfo.genreID=genre.id and bookinfo.isbn like '%" + txtISBN.getText() + "%' and bookinfo.title like '%" + txtTitle.getText() + "%' and bookinfo.author like '%" + txtAuthor.getText() + "%' and genre.genreName like '%" + ddGenre.getSelectedItem().toString() + "%' and shelf.shelfName like '%" + txtShelf.getText() + "%';";
+            String sqlStatement = "SELECT bookinfo.isbn as ISBN, bookinfo.title as Title, Concat(userdata.firstName, ' ', userdata.lastName) as Name, borrowinfo.borrowDate as 'Borrow Date', borrowinfo.dueDate as 'Due Date' from bookinfo, userdata, borrowinfo where borrowinfo.userID=userdata.id and borrowinfo.bookISBN=bookinfo.isbn and userdata.username='" + txtUsername.getText() + "';";
+            //String sqlStatement = "SELECT bookinfo.isbn as ISBN, bookinfo.title as Title, bookinfo.author as Author, shelf.shelfName as Shelf from bookinfo, shelf WHERE bookinfo.shelfID=shelf.id and bookinfo.isbn like '%%' and bookinfo.title like '%%' and bookinfo.author like '%%' and shelf.shelfName like '%%';";
+            Connection dbCon = Database.DBConnection();
+            Statement dbCom = dbCon.createStatement();
+            ResultSet bookInfo = dbCom.executeQuery(sqlStatement);
+            
+            if (bookInfo.isBeforeFirst())
+                tableReturn.setModel(DbUtils.resultSetToTableModel(bookInfo));
+            
+            dbCom.close();
+            dbCon.close();
+        } catch (SQLException | ClassNotFoundException ex)
+        {
+            JOptionPane.showMessageDialog(null, ex.toString());
+        }
+    }//GEN-LAST:event_cmdSearchActionPerformed
+    
+    private void CloseForm()
+    {
+        //backFrame.setVisible(true);
+        backFrame.setEnabled(true);
+        this.dispose();
+    }
+    
     /**
      * @param args the command line arguments
      */
@@ -118,6 +202,7 @@ public class ReturnMenu extends JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdBack;
+    private javax.swing.JButton cmdReturn;
     private javax.swing.JButton cmdSearch;
     private javax.swing.Box.Filler filler1;
     private javax.swing.JLabel jLabel1;

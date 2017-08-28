@@ -35,7 +35,8 @@ public class BorrowerMenu extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
         cmdLogout = new javax.swing.JButton();
@@ -52,20 +53,43 @@ public class BorrowerMenu extends javax.swing.JFrame
         getContentPane().add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 480, 250));
 
         cmdLogout.setText("Logout");
+        cmdLogout.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cmdLogoutActionPerformed(evt);
+            }
+        });
         getContentPane().add(cmdLogout, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 200, 130, 50));
 
         cmdLibraryBooks.setText("Library Books");
-        cmdLibraryBooks.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cmdLibraryBooks.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 cmdLibraryBooksActionPerformed(evt);
             }
         });
         getContentPane().add(cmdLibraryBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 50));
 
         cmdBorrowedBooks.setText("My Borrowed Books");
+        cmdBorrowedBooks.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cmdBorrowedBooksActionPerformed(evt);
+            }
+        });
         getContentPane().add(cmdBorrowedBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 130, 50));
 
         cmdMessages.setText("My Messages");
+        cmdMessages.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cmdMessagesActionPerformed(evt);
+            }
+        });
         getContentPane().add(cmdMessages, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 130, 50));
 
         cmdSettings.setText("Account Settings");
@@ -83,8 +107,34 @@ public class BorrowerMenu extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdLibraryBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLibraryBooksActionPerformed
-        
+        LibraryBooks form = new LibraryBooks(this, userID);
+        form.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_cmdLibraryBooksActionPerformed
+
+    private void cmdMessagesActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdMessagesActionPerformed
+    {//GEN-HEADEREND:event_cmdMessagesActionPerformed
+        // TODO add your handling code here:
+        ViewMessage form = new ViewMessage(this, userID);
+        form.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_cmdMessagesActionPerformed
+
+    private void cmdBorrowedBooksActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdBorrowedBooksActionPerformed
+    {//GEN-HEADEREND:event_cmdBorrowedBooksActionPerformed
+        // TODO add your handling code here:
+        MyBorrowedBooks form = new MyBorrowedBooks(this, userID);
+        form.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_cmdBorrowedBooksActionPerformed
+
+    private void cmdLogoutActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdLogoutActionPerformed
+    {//GEN-HEADEREND:event_cmdLogoutActionPerformed
+        // TODO add your handling code here:
+        Login form = new Login();
+        form.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_cmdLogoutActionPerformed
 
     /**
      * @param args the command line arguments

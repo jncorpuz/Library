@@ -5,7 +5,21 @@
  */
 package Forms;
 
+import Classes.Database;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.*;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.Calendar;
+import java.util.Date;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -17,12 +31,21 @@ public class LendBooks extends JFrame
     /**
      * Creates new form LendBooks
      */
-    static JFrame backFrame;
-    static String bookID;
+    private JFrame backFrame;
+    private String bookID;
     public LendBooks(JFrame a, String bID)
     {
         backFrame = a;
         bookID = bID;
+        initComponents();
+        txtISBN.setText(bookID);
+        GetData();
+        SetDate();
+    }
+    
+    public LendBooks(JFrame a)
+    {
+        backFrame = a;
         initComponents();
     }
 
@@ -33,79 +56,280 @@ public class LendBooks extends JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         lblPicture = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtISBN = new javax.swing.JTextField();
-        jSeparator1 = new javax.swing.JSeparator();
         cmdSearch = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
+        cmdLend = new javax.swing.JButton();
         jLabel6 = new javax.swing.JLabel();
-        txtISBN1 = new javax.swing.JTextField();
+        txtUsername = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         lblDueDate = new javax.swing.JLabel();
         lblDateBorrowed = new javax.swing.JLabel();
         cmdBack = new javax.swing.JButton();
+        lblTitle = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        getContentPane().add(lblPicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 210, 160));
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowClosing(java.awt.event.WindowEvent evt)
+            {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel1.setText("ISBN");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 30, 20));
-        getContentPane().add(txtISBN, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, 110, -1));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 470, 20));
 
         cmdSearch.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         cmdSearch.setText("Search");
-        getContentPane().add(cmdSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 110, 40));
-
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jButton1.setText("Lend");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 360, 110, 40));
-        getContentPane().add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 470, 10));
-
-        jLabel6.setText("Date Borrowed:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 110, 20));
-
-        txtISBN1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtISBN1ActionPerformed(evt);
+        cmdSearch.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cmdSearchActionPerformed(evt);
             }
         });
-        getContentPane().add(txtISBN1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 110, -1));
+
+        cmdLend.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        cmdLend.setText("Lend");
+        cmdLend.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cmdLendActionPerformed(evt);
+            }
+        });
+
+        jLabel6.setText("Date Borrowed:");
+
+        txtUsername.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                txtUsernameActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Username");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 50, 20));
 
         jLabel5.setText(" Due Date");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 320, 80, 20));
-        getContentPane().add(lblDueDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 320, 80, 20));
-        getContentPane().add(lblDateBorrowed, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 80, 20));
 
         cmdBack.setText("Back");
-        cmdBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cmdBack.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 cmdBackActionPerformed(evt);
             }
         });
-        getContentPane().add(cmdBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 70, 60));
+
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(cmdBack, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(40, 40, 40)
+                        .addComponent(lblPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(120, 120, 120)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(lblTitle)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(146, 146, 146)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(cmdSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txtISBN, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(72, 72, 72)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(lblDateBorrowed, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addComponent(cmdLend, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(21, 21, 21)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(lblDueDate, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 32, Short.MAX_VALUE))
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(layout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cmdBack, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblPicture, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addComponent(lblTitle)
+                .addGap(30, 30, 30)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtISBN, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmdSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txtUsername, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDueDate, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(lblDateBorrowed, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cmdLend, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtISBN1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtISBN1ActionPerformed
+    private void txtUsernameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtUsernameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtISBN1ActionPerformed
+    }//GEN-LAST:event_txtUsernameActionPerformed
 
     private void cmdBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBackActionPerformed
-        backFrame.setVisible(true);
-        this.dispose();
+        CloseForm();
     }//GEN-LAST:event_cmdBackActionPerformed
 
+    private void CloseForm()
+    {
+        //backFrame.setVisible(true);
+        backFrame.setVisible(true);
+        this.dispose();
+    }
+    private void cmdSearchActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdSearchActionPerformed
+    {//GEN-HEADEREND:event_cmdSearchActionPerformed
+        // TODO add your handling code here:
+        GetData();
+    }//GEN-LAST:event_cmdSearchActionPerformed
+
+    private void GetData()
+    {
+        try
+        {
+            String sqlStatement = "select title, imageLocation from bookinfo where isbn='" + txtISBN.getText() + "';";
+            Connection dbCon = Database.DBConnection();
+            Statement dbCom = dbCon.createStatement();
+            ResultSet bookInfo = dbCom.executeQuery(sqlStatement);
+            
+            if(bookInfo.next())
+            {
+                lblTitle.setText(bookInfo.getString("title"));
+                ImageIcon image = new ImageIcon(bookInfo.getString("imageLocation"));
+                lblPicture.setIcon(image);
+            }
+            else
+                JOptionPane.showMessageDialog(null, "Book does not exist");
+            
+            dbCom.close();
+            dbCon.close();
+        }
+        catch (SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            
+        }
+        catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }
+    
+    private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
+    {//GEN-HEADEREND:event_formWindowClosing
+        // TODO add your handling code here:
+        CloseForm();
+    }//GEN-LAST:event_formWindowClosing
+
+    private void cmdLendActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdLendActionPerformed
+    {//GEN-HEADEREND:event_cmdLendActionPerformed
+        // TODO add your handling code here:
+        try 
+        {
+            String sqlStatement = "select id from userData where username='" + txtUsername.getText() + "';";
+            Connection dbCon = Database.DBConnection();
+            Statement dbCom = dbCon.createStatement();
+            ResultSet sqlRecord = dbCom.executeQuery(sqlStatement);
+            
+            if (sqlRecord.isBeforeFirst())
+            {
+                sqlRecord.next();
+                String userID = sqlRecord.getString("id");
+                
+                sqlStatement = "insert into borrowInfo(userID, bookISBN, borrowDate, dueDate, returnDate) values(" + userID + ", '" + bookID + "', '" + lblDateBorrowed.getText() + "', '" + lblDueDate.getText() + "', null);";
+                dbCom.execute(sqlStatement);
+                
+                sqlStatement = "update bookinfo set isBorrowed='1' where isbn='" + bookID +"';";
+                dbCom.execute(sqlStatement);
+            }
+            else
+                JOptionPane.showMessageDialog(null, "User does not exist");
+            
+            dbCom.close();
+            dbCon.close();
+        }
+        catch (SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }//GEN-LAST:event_cmdLendActionPerformed
+
+    private void SetDate()
+    {
+         try 
+        {
+            //String sqlStatement = "SELECT CURDATE();";
+            //Select Date
+            //Connection dbCon = Database.DBConnection();
+            //Statement dbCom = dbCon.createStatement();
+            //ResultSet result = dbCom.executeQuery(sqlStatement);
+            
+            DateFormat dateform = new SimpleDateFormat("MM/dd/yyyy");
+            LocalDate date = LocalDate.now();
+            lblDateBorrowed.setText(DateTimeFormatter.ofPattern("yyy-MM-dd").format(date));
+            date = date.plusDays(5);
+            lblDueDate.setText(DateTimeFormatter.ofPattern("yyy-MM-dd").format(date));
+           
+           //Insert
+           //sqlStatement = "";
+
+           //dbCom.execute(sqlStatement);
+           //dbCom.close();
+           //dbCon.close();
+        }
+        catch (Exception ex)
+        {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -146,25 +370,24 @@ public class LendBooks extends JFrame
         {
             public void run()
             {
-                new LendBooks(backFrame,bookID).setVisible(true);
+                new LendBooks(null, null).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdBack;
+    private javax.swing.JButton cmdLend;
     private javax.swing.JButton cmdSearch;
-    private javax.swing.Box.Filler filler1;
-    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblDateBorrowed;
     private javax.swing.JLabel lblDueDate;
     private javax.swing.JLabel lblPicture;
+    private javax.swing.JLabel lblTitle;
     private javax.swing.JTextField txtISBN;
-    private javax.swing.JTextField txtISBN1;
+    private javax.swing.JTextField txtUsername;
     // End of variables declaration//GEN-END:variables
 }
