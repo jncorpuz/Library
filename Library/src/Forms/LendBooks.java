@@ -5,24 +5,18 @@
  */
 package Forms;
 
-import javax.swing.JFrame;
-
 /**
  *
  * @author jncor
  */
-public class LendBooks extends JFrame
+public class LendBooks extends javax.swing.JFrame
 {
 
     /**
      * Creates new form LendBooks
      */
-    static JFrame backFrame;
-    static String bookID;
-    public LendBooks(JFrame a, String bID)
+    public LendBooks()
     {
-        backFrame = a;
-        bookID = bID;
         initComponents();
     }
 
@@ -33,78 +27,76 @@ public class LendBooks extends JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         lblPicture = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         txtISBN = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
-        cmdSearch = new javax.swing.JButton();
-        jButton1 = new javax.swing.JButton();
-        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
-        jLabel6 = new javax.swing.JLabel();
-        txtISBN1 = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
+        txtISBN1 = new javax.swing.JTextField();
+        cmdSearch = new javax.swing.JButton();
         lblDueDate = new javax.swing.JLabel();
         lblDateBorrowed = new javax.swing.JLabel();
-        cmdBack = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(lblPicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, 210, 160));
 
-        jLabel1.setText("ISBN");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 30, 20));
+        jLabel1.setText("ISBN:");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 40, 20));
         getContentPane().add(txtISBN, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, 110, -1));
         getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 470, 20));
+
+        jLabel2.setText("Username:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 280, 60, 20));
+
+        txtISBN1.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                txtISBN1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txtISBN1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 280, 110, -1));
 
         cmdSearch.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         cmdSearch.setText("Search");
         getContentPane().add(cmdSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 110, 40));
+        getContentPane().add(lblDueDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 320, 80, 20));
+        getContentPane().add(lblDateBorrowed, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 280, -1, 20));
+
+        jLabel4.setText("Number of Copies:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 320, 90, 20));
+
+        jLabel5.setText(" Due Date:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 320, 60, 20));
+
+        jLabel6.setText("Date Borrowed:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 280, 80, 20));
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 320, 110, -1));
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setText("Lend");
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 360, 110, 40));
         getContentPane().add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 470, 10));
 
-        jLabel6.setText("Date Borrowed:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 110, 20));
-
-        txtISBN1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtISBN1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtISBN1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 110, -1));
-
-        jLabel2.setText("Username");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 50, 20));
-
-        jLabel5.setText(" Due Date");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 320, 80, 20));
-        getContentPane().add(lblDueDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 320, 80, 20));
-        getContentPane().add(lblDateBorrowed, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 80, 20));
-
-        cmdBack.setText("Back");
-        cmdBack.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cmdBackActionPerformed(evt);
-            }
-        });
-        getContentPane().add(cmdBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 70, 60));
-
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtISBN1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtISBN1ActionPerformed
+    private void txtISBN1ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_txtISBN1ActionPerformed
+    {//GEN-HEADEREND:event_txtISBN1ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtISBN1ActionPerformed
-
-    private void cmdBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBackActionPerformed
-        backFrame.setVisible(true);
-        this.dispose();
-    }//GEN-LAST:event_cmdBackActionPerformed
 
     /**
      * @param args the command line arguments
@@ -146,18 +138,19 @@ public class LendBooks extends JFrame
         {
             public void run()
             {
-                new LendBooks(backFrame,bookID).setVisible(true);
+                new LendBooks().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton cmdBack;
     private javax.swing.JButton cmdSearch;
     private javax.swing.Box.Filler filler1;
     private javax.swing.JButton jButton1;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JSeparator jSeparator1;
