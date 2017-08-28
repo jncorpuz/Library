@@ -3,15 +3,10 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/jncor/Documents/GitHub/Library/Library/src/Classes/Book.java</file>
-            <file>file:/C:/Users/jncor/Documents/GitHub/Library/Library/src/Classes/Database.java</file>
-            <file>file:/C:/Users/jncor/Documents/GitHub/Library/Library/src/Classes/Author.java</file>
-            <file>file:/C:/Users/jncor/Documents/GitHub/Library/Library/src/Classes/BookInfo.java</file>
-            <file>file:/C:/Users/jncor/Documents/GitHub/Library/Library/src/Classes/Person.java</file>
-            <file>file:/C:/Users/jncor/Documents/GitHub/Library/Library/src/Forms/LendBooks.java</file>
-            <file>file:/C:/Users/jncor/Documents/GitHub/Library/Library/src/Classes/Shelf.java</file>
-            <file>file:/C:/Users/jncor/Documents/GitHub/Library/Library/src/Forms/LibraryBooks.java</file>
-            <file>file:/C:/Users/jncor/Documents/GitHub/Library/Library/src/Classes/IDatabase.java</file>
+            <file>file:/C:/Users/jncor/Documents/GitHub/Library/Library/src/AdminMenu1.java</file>
+            <file>file:/C:/Users/jncor/Documents/GitHub/Library/Library/src/Forms/AddBooks.java</file>
+            <file>file:/C:/Users/jncor/Documents/GitHub/Library/Library/src/Forms/PenaltyRecord.java</file>
+            <file>file:/C:/Users/jncor/Documents/GitHub/Library/Library/src/Forms/AdminMenu.java</file>
         </group>
     </open-files>
 </project-private>
