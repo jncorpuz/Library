@@ -9,19 +9,67 @@ package Forms;
  *
  * @author Koala
  */
+import Classes.Database;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import javax.swing.JFrame;
+import java.sql.*;
+import java.util.Date;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.concurrent.TimeUnit;
+import javax.swing.JOptionPane;
 public class ReturnBook extends JFrame {
 
     /**
      * Creates new form ReturnBook
      */
     static JFrame backFrame;
-    private String bookID,userID;
-    public ReturnBook(JFrame a, String uID, String bID) {
+    private String bookID,userID,borrowID;
+    public ReturnBook(JFrame a, String uID, String bID, String brID) {
+        
+        LocalDate date = LocalDate.now();
         backFrame = a;
         bookID = bID;
         userID = uID;
+        borrowID = brID;
         initComponents();
+        try{
+            String sqlStatement = "SELECT borrowDate, dueDate from borrowinfo where id='" + brID +"'";
+            System.out.println(brID);
+            Connection dbCon = Database.DBConnection();
+            Statement dbCom = dbCon.createStatement();
+            ResultSet result = dbCom.executeQuery(sqlStatement);
+            
+            if(result.isBeforeFirst())
+            {
+                result.next();
+                lblDueDate.setText(result.getString(2));
+                lblDateBorrowed.setText(result.getString(1));
+            }
+        }
+        catch (SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            
+        }
+        catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        lblReturnDate1.setText(DateTimeFormatter.ofPattern("yyy-MM-dd").format(date));
+        SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try {
+            Date date1 = myFormat.parse(lblDueDate.getText());
+            Date date2 = myFormat.parse(lblReturnDate1.getText());
+            long diff = date2.getTime() - date1.getTime();
+            System.out.println ("Days: " + TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS));
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        lblISBN.setText(bID);
+        lblUserName.setText(uID);
+        
     }
     
     public ReturnBook()
@@ -40,18 +88,19 @@ public class ReturnBook extends JFrame {
 
         lblPicture = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        txtISBN = new javax.swing.JTextField();
         jSeparator1 = new javax.swing.JSeparator();
         jLabel2 = new javax.swing.JLabel();
-        txtISBN1 = new javax.swing.JTextField();
-        cmdSearch = new javax.swing.JButton();
         lblDateBorrowed = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         cmdLend = new javax.swing.JButton();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
-        txtReturnDate = new javax.swing.JTextField();
         cmdBack = new javax.swing.JButton();
+        lblISBN = new javax.swing.JLabel();
+        lblUserName = new javax.swing.JLabel();
+        lblDueDate = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        lblReturnDate1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -59,42 +108,27 @@ public class ReturnBook extends JFrame {
 
         jLabel1.setText("ISBN");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 190, 30, 20));
-        getContentPane().add(txtISBN, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, 110, -1));
-        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 270, 470, 20));
+        getContentPane().add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 230, 470, 20));
 
-        jLabel2.setText("Username");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 280, 50, 20));
+        jLabel2.setText("Username:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 260, 60, 20));
+        getContentPane().add(lblDateBorrowed, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 290, 100, 20));
 
-        txtISBN1.setEnabled(false);
-        txtISBN1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtISBN1ActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtISBN1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 280, 110, -1));
-
-        cmdSearch.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        cmdSearch.setText("Search");
-        getContentPane().add(cmdSearch, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 220, 110, 40));
-        getContentPane().add(lblDateBorrowed, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 320, 80, 20));
-
-        jLabel5.setText("Return Date");
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 320, 80, 20));
+        jLabel5.setText("Due Date:");
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 260, 80, 20));
 
         jLabel6.setText("Date Borrowed:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 320, 110, 20));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 290, 110, 20));
 
         cmdLend.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         cmdLend.setText("Return");
-        getContentPane().add(cmdLend, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 360, 110, 40));
-        getContentPane().add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 400, 470, 10));
-
-        txtReturnDate.addActionListener(new java.awt.event.ActionListener() {
+        cmdLend.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtReturnDateActionPerformed(evt);
+                cmdLendActionPerformed(evt);
             }
         });
-        getContentPane().add(txtReturnDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 320, 100, -1));
+        getContentPane().add(cmdLend, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, 110, 40));
+        getContentPane().add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 370, 470, 10));
 
         cmdBack.setText("Back");
         cmdBack.addActionListener(new java.awt.event.ActionListener() {
@@ -103,22 +137,57 @@ public class ReturnBook extends JFrame {
             }
         });
         getContentPane().add(cmdBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 70, 60));
+        getContentPane().add(lblISBN, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 190, 100, 20));
+        getContentPane().add(lblUserName, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 260, 100, 20));
+        getContentPane().add(lblDueDate, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 260, 100, 20));
+
+        jLabel7.setText("Return Date:");
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 290, 80, 20));
+        getContentPane().add(lblReturnDate1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 290, 100, 20));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txtISBN1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtISBN1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtISBN1ActionPerformed
-
-    private void txtReturnDateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtReturnDateActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtReturnDateActionPerformed
 
     private void cmdBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBackActionPerformed
         backFrame.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_cmdBackActionPerformed
+
+    private void cmdLendActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLendActionPerformed
+        SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
+        try{
+            String statement = "select dueDate from borrowinfo where id=" + borrowID;
+            Connection dbCon = Database.DBConnection();
+            Statement dbCom = dbCon.createStatement();
+            ResultSet result = dbCom.executeQuery(statement);
+            if(result.isBeforeFirst())
+            {
+                result.next();
+                String date = result.getString(1);
+                Date date1 = myFormat.parse(date);
+                Date date2 = myFormat.parse(lblReturnDate1.getText());
+                long diff = date2.getTime() - date1.getTime();
+                if(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS)<=0)
+                {
+                    statement = "update borrowinfo set returnDate='" + date2 + "'";
+                    dbCom.execute(statement);
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Please settle your penalty first before returning the book/s");
+                }
+            }
+        }
+        catch (SQLException e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+            
+        }
+        catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+    }//GEN-LAST:event_cmdLendActionPerformed
 
     /**
      * @param args the command line arguments
@@ -158,17 +227,18 @@ public class ReturnBook extends JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdBack;
     private javax.swing.JButton cmdLend;
-    private javax.swing.JButton cmdSearch;
     private javax.swing.Box.Filler filler1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel lblDateBorrowed;
+    private javax.swing.JLabel lblDueDate;
+    private javax.swing.JLabel lblISBN;
     private javax.swing.JLabel lblPicture;
-    private javax.swing.JTextField txtISBN;
-    private javax.swing.JTextField txtISBN1;
-    private javax.swing.JTextField txtReturnDate;
+    private javax.swing.JLabel lblReturnDate1;
+    private javax.swing.JLabel lblUserName;
     // End of variables declaration//GEN-END:variables
 }

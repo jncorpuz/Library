@@ -16,10 +16,10 @@ public class ViewSpecificBook extends JFrame {
     /**
      * Creates new form ViewSpecificBook
      */
-    static JFrame libraryBook;
+    static JFrame backFrame;
     static String userID,bookID;
     public ViewSpecificBook(JFrame a, String uID, String bID) {
-        libraryBook = a;
+        backFrame = a;
         userID = uID;
         bookID = bID;
         initComponents();
@@ -59,6 +59,7 @@ public class ViewSpecificBook extends JFrame {
         jLabel11 = new javax.swing.JLabel();
         txtShelfLocation = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
+        cmdBack = new javax.swing.JButton();
         cmdPlaceHold = new javax.swing.JButton();
         cmdLendBook = new javax.swing.JButton();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
@@ -124,6 +125,14 @@ public class ViewSpecificBook extends JFrame {
         jLabel12.setText("Shelf Location");
         jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 90, 20));
 
+        cmdBack.setText("Back");
+        cmdBack.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cmdBackActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmdBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 70, 70));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 450));
 
         cmdPlaceHold.setText("Place Hold");
@@ -159,6 +168,10 @@ public class ViewSpecificBook extends JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmdLendBookActionPerformed
 
+    private void cmdBackActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdBackActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cmdBackActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -189,12 +202,13 @@ public class ViewSpecificBook extends JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewSpecificBook(libraryBook,userID,bookID).setVisible(true);
+                new ViewSpecificBook(backFrame,userID,bookID).setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cmdBack;
     public javax.swing.JButton cmdLendBook;
     public javax.swing.JButton cmdPlaceHold;
     private javax.swing.Box.Filler filler1;
