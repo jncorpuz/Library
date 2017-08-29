@@ -16,9 +16,9 @@ import javax.swing.JOptionPane;
 public class Database
 {
     //Local Connection Details
-    private static final String connectionStr = "jdbc:mysql://DESKTOP-B322RD1:3306/library";
+    private static final String connectionStr = "jdbc:mysql://DESKTOP-B322RD1:3306/library?useSSL=false";
     private static final String username = "library";
-    private static final String password = "x0zKfKOUuNzIWSwI";
+    private static final String password = "Okja2017";
     
     //Online Database Connection Details
     //private static final String connectionStr = "jdbc:mysql://db4free.net:3306/libraryjava";
