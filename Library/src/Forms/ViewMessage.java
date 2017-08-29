@@ -11,7 +11,13 @@ package Forms;
  *
  * @author Koala
  */
+import Classes.Database;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import javax.swing.*;
+import net.proteanit.sql.DbUtils;
 public class ViewMessage extends JFrame {
 
     /**
@@ -25,6 +31,26 @@ public class ViewMessage extends JFrame {
         initComponents();
     }
     
+    private void PopulateTable()
+    {
+        try
+        {
+            String sqlStatement = "SELECT message.id, message.message, message.dateSent FROM message where message.userID='" + userID + "';";
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection dbCon = Database.DBConnection();
+            Statement dbCom = dbCon.createStatement();
+            ResultSet bookInfo = dbCom.executeQuery(sqlStatement);
+            
+            tblMessages.setModel(DbUtils.resultSetToTableModel(bookInfo));
+            
+            dbCom.close();
+            dbCon.close();
+        } catch (SQLException | ClassNotFoundException ex)
+        {
+            JOptionPane.showMessageDialog(null, ex.toString());
+        }
+    }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -36,14 +62,14 @@ public class ViewMessage extends JFrame {
     {
 
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        tblMessages = new javax.swing.JTable();
         cmdBack = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
         setResizable(false);
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        tblMessages.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
                 {null, null, null, null},
@@ -56,14 +82,14 @@ public class ViewMessage extends JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jTable1.addMouseListener(new java.awt.event.MouseAdapter()
+        tblMessages.addMouseListener(new java.awt.event.MouseAdapter()
         {
             public void mouseClicked(java.awt.event.MouseEvent evt)
             {
-                jTable1MouseClicked(evt);
+                tblMessagesMouseClicked(evt);
             }
         });
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(tblMessages);
 
         cmdBack.setText("Back");
         cmdBack.addActionListener(new java.awt.event.ActionListener()
@@ -107,11 +133,11 @@ public class ViewMessage extends JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        int row = jTable1.rowAtPoint(evt.getPoint());
-        int col = jTable1.columnAtPoint(evt.getPoint());
+    private void tblMessagesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tblMessagesMouseClicked
+        int row = tblMessages.rowAtPoint(evt.getPoint());
+        int col = tblMessages.columnAtPoint(evt.getPoint());
         
-    }//GEN-LAST:event_jTable1MouseClicked
+    }//GEN-LAST:event_tblMessagesMouseClicked
 
     private void cmdBackActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdBackActionPerformed
     {//GEN-HEADEREND:event_cmdBackActionPerformed
@@ -160,6 +186,6 @@ public class ViewMessage extends JFrame {
     private javax.swing.JButton cmdBack;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable1;
+    private javax.swing.JTable tblMessages;
     // End of variables declaration//GEN-END:variables
 }

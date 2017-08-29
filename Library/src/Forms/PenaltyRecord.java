@@ -5,8 +5,20 @@
  */
 package Forms;
 
+import Classes.Database;
+import java.awt.HeadlessException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -18,9 +30,37 @@ public class PenaltyRecord extends javax.swing.JFrame
     /**
      * Creates new form PenaltyRecord
      */
+    private JFrame backFrame;
+    public PenaltyRecord(JFrame backFrame)
+    {
+        this.backFrame = backFrame;
+        initComponents();
+        PopulateTable();
+    }
+    
     public PenaltyRecord()
     {
         initComponents();
+    }
+    
+    private void PopulateTable()
+    {
+        try
+        {
+            String sqlStatement = "SELECT borrowinfo.id as 'Borrow ID', bookinfo.isbn as ISBN, bookinfo.title as Title, userdata.username as Username, borrowinfo.dueDate as 'Due Date' from borrowinfo, userdata, bookinfo where borrowinfo.bookISBN=bookinfo.isbn and borrowinfo.userID=userdata.id and borrowinfo.dueDate<CURRENT_DATE and NOT borrowinfo.returnDate=NULL;";
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection dbCon = Database.DBConnection();
+            Statement dbCom = dbCon.createStatement();
+            ResultSet bookInfo = dbCom.executeQuery(sqlStatement);
+            
+            tblPenaltyRecords.setModel(DbUtils.resultSetToTableModel(bookInfo));
+            
+            dbCom.close();
+            dbCon.close();
+        } catch (SQLException | ClassNotFoundException ex)
+        {
+            JOptionPane.showMessageDialog(null, ex.toString());
+        }
     }
 
     /**
@@ -35,16 +75,17 @@ public class PenaltyRecord extends javax.swing.JFrame
 
         jPanel2 = new javax.swing.JPanel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jtAdminPenaltyRecord = new javax.swing.JTable();
+        tblPenaltyRecords = new javax.swing.JTable();
         jLabel4 = new javax.swing.JLabel();
-        jBtnRemove = new javax.swing.JButton();
+        cmdBack = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setResizable(false);
 
-        jtAdminPenaltyRecord.setModel(new javax.swing.table.DefaultTableModel(
+        tblPenaltyRecords.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
                 {"1", "12435364734", "TheBird", null, "1", "4", "20"},
@@ -59,24 +100,24 @@ public class PenaltyRecord extends javax.swing.JFrame
                 "UserID", "ISBN", "Title", "GenreID", "Length of Books", "Days OverDue:", "Amount"
             }
         ));
-        jtAdminPenaltyRecord.addMouseListener(new java.awt.event.MouseAdapter()
+        tblPenaltyRecords.addMouseListener(new java.awt.event.MouseAdapter()
         {
             public void mouseClicked(java.awt.event.MouseEvent evt)
             {
-                jtAdminPenaltyRecordMouseClicked(evt);
+                tblPenaltyRecordsMouseClicked(evt);
             }
         });
-        jScrollPane3.setViewportView(jtAdminPenaltyRecord);
+        jScrollPane3.setViewportView(tblPenaltyRecords);
 
         jLabel4.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel4.setText("Penalty Records:");
 
-        jBtnRemove.setText("Verify Payment");
-        jBtnRemove.addActionListener(new java.awt.event.ActionListener()
+        cmdBack.setText("Back");
+        cmdBack.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                jBtnRemoveActionPerformed(evt);
+                cmdBackActionPerformed(evt);
             }
         });
 
@@ -85,29 +126,24 @@ public class PenaltyRecord extends javax.swing.JFrame
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
                         .addComponent(jLabel4)
-                        .addGap(0, 323, Short.MAX_VALUE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jScrollPane3)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cmdBack, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 491, Short.MAX_VALUE))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
-                .addComponent(jBtnRemove)
-                .addGap(203, 203, 203))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cmdBack, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jBtnRemove)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -136,36 +172,58 @@ public class PenaltyRecord extends javax.swing.JFrame
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jtAdminPenaltyRecordMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_jtAdminPenaltyRecordMouseClicked
-    {//GEN-HEADEREND:event_jtAdminPenaltyRecordMouseClicked
-        //    int index=jtAdminPenaltyRecord.getSelectedRow();
-        //   TableModel model=jtAdminPenaltyRecord.getModel();
-    }//GEN-LAST:event_jtAdminPenaltyRecordMouseClicked
-
-    private void jBtnRemoveActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_jBtnRemoveActionPerformed
-    {//GEN-HEADEREND:event_jBtnRemoveActionPerformed
-        DefaultTableModel model=(DefaultTableModel) jtAdminPenaltyRecord.getModel();
+    private void tblPenaltyRecordsMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tblPenaltyRecordsMouseClicked
+    {//GEN-HEADEREND:event_tblPenaltyRecordsMouseClicked
+        DefaultTableModel model = (DefaultTableModel)tblPenaltyRecords.getModel();
         //get selected row index
         try
         {
-            int SelectedRowIndex=jtAdminPenaltyRecord.getSelectedRow();
-
-            int message=JOptionPane.showConfirmDialog(null,"Is this Borrower payed his/her fine?","PenaltyRecord",JOptionPane.YES_NO_OPTION);
-            if(message==JOptionPane.YES_OPTION)
+            String borrowInfoID = tblPenaltyRecords.getValueAt(tblPenaltyRecords.getSelectedRow(), 0).toString();
+            
+            SimpleDateFormat myFormat = new SimpleDateFormat("yyyy-MM-dd");
+            
+            String statement = "select dueDate, CURRENT_DATE from borrowinfo where id=" + borrowInfoID;
+            Connection dbCon = Database.DBConnection();
+            Statement dbCom = dbCon.createStatement();
+            ResultSet result = dbCom.executeQuery(statement);
+            if(result.isBeforeFirst())
             {
-                model.removeRow(SelectedRowIndex);
-                // JOptionPane.showConfirmDialog(null,"The record has successfully deleted.");
+                result.next();
+                String date = result.getString(1);
+                String dateNow = result.getString(2);
+                Date date1 = myFormat.parse(date);
+                Date date2 = myFormat.parse(dateNow);
+                long diff = date2.getTime() - date1.getTime();
+                
+                if(TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS)>0)
+                {
+                    long numofDays = TimeUnit.DAYS.convert(diff, TimeUnit.MILLISECONDS);
+                    long amount = numofDays * 10;
+                    
+                    int message = JOptionPane.showConfirmDialog(null,"Pay the P" + amount + " Fine?","PenaltyRecord",JOptionPane.YES_NO_OPTION);
+                    if(message == JOptionPane.YES_OPTION)
+                    {
+                        statement = "insert into penaltyrecords(borrowInfoID, amount) values('" + borrowInfoID + "', '" + amount + "');";
+                        dbCom.execute(statement);
+                    }
+                }
             }
         }
-        catch(Exception e)
+        catch(HeadlessException | SQLException | ParseException e)
         {
-            JOptionPane.showMessageDialog(null,"Information denied");
+            JOptionPane.showMessageDialog(null, e.getMessage());
 
         }
-    }//GEN-LAST:event_jBtnRemoveActionPerformed
+    }//GEN-LAST:event_tblPenaltyRecordsMouseClicked
 
+    private void cmdBackActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdBackActionPerformed
+    {//GEN-HEADEREND:event_cmdBackActionPerformed
+        
+    }//GEN-LAST:event_cmdBackActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -212,13 +270,13 @@ public class PenaltyRecord extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBtnRemove;
+    private javax.swing.JButton cmdBack;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable jtAdminPenaltyRecord;
+    private javax.swing.JTable tblPenaltyRecords;
     // End of variables declaration//GEN-END:variables
 }

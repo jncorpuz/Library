@@ -121,6 +121,13 @@ public class AdminMenu extends javax.swing.JFrame
         cmdHolidayManagement.setLabel("<html>Holiday<br>Management</html>");
         cmdHolidayManagement.setMaximumSize(new java.awt.Dimension(91, 24));
         cmdHolidayManagement.setMinimumSize(new java.awt.Dimension(91, 24));
+        cmdHolidayManagement.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cmdHolidayManagementActionPerformed(evt);
+            }
+        });
         jPanel1.add(cmdHolidayManagement, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 130, 50));
 
         cmdMessages.setText("Messages");
@@ -192,9 +199,9 @@ public class AdminMenu extends javax.swing.JFrame
     private void cmdPenaltyRecordsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdPenaltyRecordsActionPerformed
     {//GEN-HEADEREND:event_cmdPenaltyRecordsActionPerformed
         // TODO add your handling code here:
-        //PenaltyRecords form = new PenaltyRecords();
-        //form.setVisible(true);
-        //this.setVisible(false);
+        PenaltyRecord form = new PenaltyRecord(this);
+        form.setVisible(true);
+        this.setVisible(false);
     }//GEN-LAST:event_cmdPenaltyRecordsActionPerformed
 
     private void cmdViewBooksActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdViewBooksActionPerformed
@@ -222,10 +229,19 @@ public class AdminMenu extends javax.swing.JFrame
     private void cmdAddBookActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdAddBookActionPerformed
     {//GEN-HEADEREND:event_cmdAddBookActionPerformed
         // TODO add your handling code here:
-        AddBooks form = new AddBooks(this);
+        AddBook form = new AddBook(this);
         form.setVisible(true);
-        this.setEnabled(false);
+        this.setVisible(false);
+        //this.setEnabled(false);
     }//GEN-LAST:event_cmdAddBookActionPerformed
+
+    private void cmdHolidayManagementActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdHolidayManagementActionPerformed
+    {//GEN-HEADEREND:event_cmdHolidayManagementActionPerformed
+        // TODO add your handling code here:
+        AddHoliday form = new AddHoliday(this);
+        form.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_cmdHolidayManagementActionPerformed
 
     /**
      * @param args the command line arguments

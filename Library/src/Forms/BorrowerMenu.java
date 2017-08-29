@@ -43,7 +43,7 @@ public class BorrowerMenu extends javax.swing.JFrame
         cmdLibraryBooks = new javax.swing.JButton();
         cmdBorrowedBooks = new javax.swing.JButton();
         cmdMessages = new javax.swing.JButton();
-        cmdSettings = new javax.swing.JButton();
+        cmdCurrentBooks = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -73,7 +73,7 @@ public class BorrowerMenu extends javax.swing.JFrame
         });
         getContentPane().add(cmdLibraryBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 130, 50));
 
-        cmdBorrowedBooks.setText("My Borrowed Books");
+        cmdBorrowedBooks.setText("Borrowed Books");
         cmdBorrowedBooks.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
@@ -81,7 +81,7 @@ public class BorrowerMenu extends javax.swing.JFrame
                 cmdBorrowedBooksActionPerformed(evt);
             }
         });
-        getContentPane().add(cmdBorrowedBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 130, 50));
+        getContentPane().add(cmdBorrowedBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 130, 50));
 
         cmdMessages.setText("My Messages");
         cmdMessages.addActionListener(new java.awt.event.ActionListener()
@@ -91,10 +91,17 @@ public class BorrowerMenu extends javax.swing.JFrame
                 cmdMessagesActionPerformed(evt);
             }
         });
-        getContentPane().add(cmdMessages, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 100, 130, 50));
+        getContentPane().add(cmdMessages, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 130, 50));
 
-        cmdSettings.setText("Account Settings");
-        getContentPane().add(cmdSettings, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 150, 130, 50));
+        cmdCurrentBooks.setText("Current Borrowed Books");
+        cmdCurrentBooks.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cmdCurrentBooksActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cmdCurrentBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 50, 130, 50));
 
         jMenu1.setText("File");
         jMenuBar1.add(jMenu1);
@@ -125,7 +132,7 @@ public class BorrowerMenu extends javax.swing.JFrame
     private void cmdBorrowedBooksActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdBorrowedBooksActionPerformed
     {//GEN-HEADEREND:event_cmdBorrowedBooksActionPerformed
         // TODO add your handling code here:
-        MyBorrowedBooks form = new MyBorrowedBooks(this, userID);
+        HistoryBorrowedBooks form = new HistoryBorrowedBooks(this, userID);
         form.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_cmdBorrowedBooksActionPerformed
@@ -137,6 +144,14 @@ public class BorrowerMenu extends javax.swing.JFrame
         form.setVisible(true);
         this.dispose();
     }//GEN-LAST:event_cmdLogoutActionPerformed
+
+    private void cmdCurrentBooksActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdCurrentBooksActionPerformed
+    {//GEN-HEADEREND:event_cmdCurrentBooksActionPerformed
+        // TODO add your handling code here:
+        MyBorrowedBooks form = new MyBorrowedBooks(this, userID);
+        form.setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_cmdCurrentBooksActionPerformed
 
     /**
      * @param args the command line arguments
@@ -185,10 +200,10 @@ public class BorrowerMenu extends javax.swing.JFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton cmdBorrowedBooks;
+    private javax.swing.JButton cmdCurrentBooks;
     private javax.swing.JButton cmdLibraryBooks;
     private javax.swing.JButton cmdLogout;
     private javax.swing.JButton cmdMessages;
-    private javax.swing.JButton cmdSettings;
     private javax.swing.Box.Filler filler1;
     private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;

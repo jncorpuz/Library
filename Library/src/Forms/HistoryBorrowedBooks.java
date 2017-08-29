@@ -18,14 +18,14 @@ import net.proteanit.sql.DbUtils;
  *
  * @author jncor
  */
-public class MyBorrowedBooks extends javax.swing.JFrame
+public class HistoryBorrowedBooks extends javax.swing.JFrame
 {
     private JFrame backFrame;
     private String userID;
     /**
      * Creates new form MyBorrowedBooks
      */
-    public MyBorrowedBooks(JFrame backFrame, String userID)
+    public HistoryBorrowedBooks(JFrame backFrame, String userID)
     {
         this.backFrame = backFrame;
         this.userID = userID;
@@ -33,7 +33,7 @@ public class MyBorrowedBooks extends javax.swing.JFrame
         PopulateTable();
     }
     
-    public MyBorrowedBooks()
+    public HistoryBorrowedBooks()
     {
         
     }
@@ -43,7 +43,7 @@ public class MyBorrowedBooks extends javax.swing.JFrame
         try
         {
             Class.forName("com.mysql.jdbc.Driver");
-            String sqlStatement = "SELECT bookinfo.isbn AS ISBN, bookinfo.title AS Title, bookinfo.author AS Author, borrowinfo.dueDate AS 'Due Date', borrowinfo.returnDate AS 'Return Date' from bookinfo, borrowinfo, userdata WHERE bookinfo.isbn=borrowinfo.bookISBN AND borrowinfo.userID=userdata.id AND userdata.id='" + this.userID + "' AND borrowinfo.returnDate is null;";
+            String sqlStatement = "SELECT bookinfo.isbn AS ISBN, bookinfo.title AS Title, bookinfo.author AS Author, borrowinfo.dueDate AS 'Due Date', borrowinfo.returnDate AS 'Return Date' from bookinfo, borrowinfo, userdata WHERE bookinfo.isbn=borrowinfo.bookISBN AND borrowinfo.userID=userdata.id AND userdata.id='" + this.userID + "' AND borrowinfo.returnDate is not null;";
             Connection dbCon = Database.DBConnection();
             Statement dbCom = dbCon.createStatement();
             ResultSet bookInfo = dbCom.executeQuery(sqlStatement);
@@ -78,7 +78,7 @@ public class MyBorrowedBooks extends javax.swing.JFrame
         setResizable(false);
 
         jLabel7.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        jLabel7.setText("My Borrowed Books:");
+        jLabel7.setText("History of Borrowed Books:");
 
         cmdBack.setText("Back");
         cmdBack.addActionListener(new java.awt.event.ActionListener()
@@ -180,19 +180,17 @@ public class MyBorrowedBooks extends javax.swing.JFrame
             }
         } catch (ClassNotFoundException ex)
         {
-            java.util.logging.Logger.getLogger(MyBorrowedBooks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HistoryBorrowedBooks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex)
         {
-            java.util.logging.Logger.getLogger(MyBorrowedBooks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HistoryBorrowedBooks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex)
         {
-            java.util.logging.Logger.getLogger(MyBorrowedBooks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HistoryBorrowedBooks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex)
         {
-            java.util.logging.Logger.getLogger(MyBorrowedBooks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(HistoryBorrowedBooks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
-        //</editor-fold>
         //</editor-fold>
         //</editor-fold>
 
@@ -201,7 +199,7 @@ public class MyBorrowedBooks extends javax.swing.JFrame
         {
             public void run()
             {
-                new MyBorrowedBooks().setVisible(true);
+                new HistoryBorrowedBooks().setVisible(true);
             }
         });
     }
