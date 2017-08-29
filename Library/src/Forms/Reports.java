@@ -10,6 +10,7 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import net.proteanit.sql.DbUtils;
 
@@ -19,7 +20,7 @@ import net.proteanit.sql.DbUtils;
  */
 public class Reports extends javax.swing.JFrame
 {
-
+    private JFrame backForm;
     /**
      * Creates new form Reports
      */
@@ -28,6 +29,11 @@ public class Reports extends javax.swing.JFrame
         initComponents();
     }
 
+    public Reports(JFrame backForm)
+    {
+        this.backForm = backForm;
+        initComponents();
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -45,9 +51,17 @@ public class Reports extends javax.swing.JFrame
         cmdLendBook3 = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tblReport = new javax.swing.JTable();
-        cmdLendBook4 = new javax.swing.JButton();
+        cmdBack = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowClosing(java.awt.event.WindowEvent evt)
+            {
+                formWindowClosing(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel4.setText("Reports");
@@ -99,26 +113,23 @@ public class Reports extends javax.swing.JFrame
         tblReport.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String []
             {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         jScrollPane1.setViewportView(tblReport);
 
-        cmdLendBook4.setText("Back");
-        cmdLendBook4.setMaximumSize(new java.awt.Dimension(91, 24));
-        cmdLendBook4.setMinimumSize(new java.awt.Dimension(91, 24));
-        cmdLendBook4.addActionListener(new java.awt.event.ActionListener()
+        cmdBack.setText("Back");
+        cmdBack.setMaximumSize(new java.awt.Dimension(91, 24));
+        cmdBack.setMinimumSize(new java.awt.Dimension(91, 24));
+        cmdBack.addActionListener(new java.awt.event.ActionListener()
         {
             public void actionPerformed(java.awt.event.ActionEvent evt)
             {
-                cmdLendBook4ActionPerformed(evt);
+                cmdBackActionPerformed(evt);
             }
         });
 
@@ -135,7 +146,7 @@ public class Reports extends javax.swing.JFrame
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(cmdLendBook4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(cmdBack, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(layout.createSequentialGroup()
                                 .addComponent(cmdBorrowedBooks, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -154,7 +165,7 @@ public class Reports extends javax.swing.JFrame
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(2, 2, 2)
-                        .addComponent(cmdLendBook4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cmdBack, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(cmdPenaltyRecords, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -168,18 +179,39 @@ public class Reports extends javax.swing.JFrame
         );
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdBorrowedBooksActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdBorrowedBooksActionPerformed
     {//GEN-HEADEREND:event_cmdBorrowedBooksActionPerformed
         // TODO add your handling code here:
-        
+        PopulateTable("SELECT bookinfo.isbn as ISBN, bookinfo.title as Title, userdata.username as Username, borrowinfo.borrowDate as 'Borrow Date', borrowinfo.dueDate as 'Due Date' from bookinfo, userdata, borrowinfo WHERE bookinfo.isbn=borrowinfo.bookISBN and userdata.id=borrowinfo.userID;");
         
     }//GEN-LAST:event_cmdBorrowedBooksActionPerformed
 
+    private void PopulateTable(String sqlStatement)
+    {
+        try
+        {
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection dbCon = Database.DBConnection();
+            Statement dbCom = dbCon.createStatement();
+            ResultSet bookInfo = dbCom.executeQuery(sqlStatement);
+            
+            tblReport.setModel(DbUtils.resultSetToTableModel(bookInfo));
+            
+            dbCom.close();
+            dbCon.close();
+        } catch (SQLException | ClassNotFoundException ex)
+        {
+            JOptionPane.showMessageDialog(null, ex.toString());
+        }
+    }
+    
     private void cmdPenaltyRecordsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdPenaltyRecordsActionPerformed
     {//GEN-HEADEREND:event_cmdPenaltyRecordsActionPerformed
         // TODO add your handling code here:
+        PopulateTable("SELECT penaltyrecords.id as 'Penalty ID', borrowinfo.id as 'BorrowInfo ID', bookinfo.title as Title, userdata.username as Username, penaltyrecords.amount as Amount FROM penaltyrecords, borrowinfo, bookinfo, userdata WHERE penaltyrecords.borrowInfoID=borrowinfo.id AND borrowinfo.userID=userdata.id AND borrowinfo.bookISBN=bookinfo.isbn;");
     }//GEN-LAST:event_cmdPenaltyRecordsActionPerformed
 
     private void cmdLendBook2ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdLendBook2ActionPerformed
@@ -192,32 +224,22 @@ public class Reports extends javax.swing.JFrame
         // TODO add your handling code here:
     }//GEN-LAST:event_cmdLendBook3ActionPerformed
 
-    private void cmdLendBook4ActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdLendBook4ActionPerformed
-    {//GEN-HEADEREND:event_cmdLendBook4ActionPerformed
+    private void cmdBackActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdBackActionPerformed
+    {//GEN-HEADEREND:event_cmdBackActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_cmdLendBook4ActionPerformed
+        CloseForm();
+    }//GEN-LAST:event_cmdBackActionPerformed
 
-    private void PopulateTable(String sqlStatement)
+    private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
+    {//GEN-HEADEREND:event_formWindowClosing
+        // TODO add your handling code here:
+        CloseForm();
+    }//GEN-LAST:event_formWindowClosing
+    
+    private void CloseForm()
     {
-        try
-        {
-            Class.forName("com.mysql.jdbc.Driver");
-            //String sqlStatement = "SELECT bookinfo.isbn, bookinfo.title, bookinfo.author, shelf.shelfName from bookinfo, shelf, genre where bookinfo.shelfID=shelf.id and bookinfo.genreID=genre.id and bookinfo.isbn like '%" + txtISBN.getText() + "%' and bookinfo.title like '%" + txtTitle.getText() + "%' and bookinfo.author like '%" + txtAuthor.getText() + "%' and genre.genreName like '%" + ddGenre.getSelectedItem().toString() + "%' and shelf.shelfName like '%" + txtShelf.getText() + "%';";
-            //String sqlStatement = "SELECT bookinfo.isbn, bookinfo.title, bookinfo.author, shelf.shelfName from bookinfo, shelf, genre where bookinfo.shelfID=shelf.id and bookinfo.genreID=genre.id and bookinfo.isbn like '%%' and bookinfo.title like '%%' and bookinfo.author like '%%' and genre.genreName like '%%' and shelf.shelfName like '%%';";
-            //String sqlStatement = "SELECT bookinfo.isbn as ISBN, bookinfo.title as Title, bookinfo.author as Author, shelf.shelfName as Shelf from bookinfo, shelf WHERE bookinfo.shelfID=shelf.id and bookinfo.isbn like '%%' and bookinfo.title like '%%' and bookinfo.author like '%%' and shelf.shelfName like '%%';";
-            Connection dbCon = Database.DBConnection();
-            Statement dbCom = dbCon.createStatement();
-            ResultSet bookInfo = dbCom.executeQuery(sqlStatement);
-            
-            if (bookInfo.isBeforeFirst())
-                tblReport.setModel(DbUtils.resultSetToTableModel(bookInfo));
-            
-            dbCom.close();
-            dbCon.close();
-        } catch (SQLException | ClassNotFoundException ex)
-        {
-            JOptionPane.showMessageDialog(null, ex.toString());
-        }
+        this.backForm.setVisible(true);
+        this.dispose();
     }
     
     /**
@@ -266,10 +288,10 @@ public class Reports extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cmdBack;
     private javax.swing.JButton cmdBorrowedBooks;
     private javax.swing.JButton cmdLendBook2;
     private javax.swing.JButton cmdLendBook3;
-    private javax.swing.JButton cmdLendBook4;
     private javax.swing.JButton cmdPenaltyRecords;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;

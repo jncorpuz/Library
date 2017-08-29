@@ -5,7 +5,22 @@
  */
 package Forms;
 
+import Classes.Database;
+import java.awt.Image;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import net.proteanit.sql.DbUtils;
 
 /**
  *
@@ -16,13 +31,63 @@ public class ViewSpecificBook extends JFrame {
     /**
      * Creates new form ViewSpecificBook
      */
-    static JFrame libraryBook;
-    static String userID,bookID;
+    private JFrame libraryBook;
+    private String userID,bookID;
+    private BufferedImage originalBI;
+    
     public ViewSpecificBook(JFrame a, String uID, String bID) {
         libraryBook = a;
         userID = uID;
         bookID = bID;
         initComponents();
+        txtISBN.setText(bookID);
+        GetData();
+    }
+    
+    public ViewSpecificBook()
+    {
+        
+    }
+    
+    private void GetData()
+    {
+        try
+        {
+            String sqlStatement = "SELECT bookinfo.title, shelf.shelfName, bookinfo.author, genre.genreName, bookinfo.length, bookinfo.alternateTitle, bookinfo.publicationDate, bookinfo.publicationInfo, bookinfo.summary, bookinfo.imageLocation FROM bookinfo, genre, shelf WHERE bookinfo.shelfID=shelf.id AND bookinfo.genreID=genre.id and bookinfo.isbn='" + this.bookID + "';";
+            Class.forName("com.mysql.jdbc.Driver");
+            Connection dbCon = Database.DBConnection();
+            Statement dbCom = dbCon.createStatement();
+            ResultSet bookInfo = dbCom.executeQuery(sqlStatement);
+            
+            bookInfo.next();
+            txtTitle.setText(bookInfo.getString(1));
+            txtShelfLocation.setText(bookInfo.getString(2));
+            txtAuthor.setText(bookInfo.getString(3));
+            txtGenre.setText(bookInfo.getString(4));
+            txtLength.setText(bookInfo.getString(5));
+            txtAlternativeTitle.setText(bookInfo.getString(6));
+            txtPublicationDate.setText(bookInfo.getString(7));
+            txtPublisher.setText(bookInfo.getString(8));
+            txtSummary.setText(bookInfo.getString(9));
+            
+            //image
+            if (bookInfo.getString(10) != "")
+            {
+                originalBI = ImageIO.read(new File(System.getProperty("user.dir") + bookInfo.getString(10)));
+                Image dimg = originalBI.getScaledInstance(lblPicture.getWidth(), lblPicture.getHeight(), Image.SCALE_SMOOTH);
+                ImageIcon icon = new ImageIcon(dimg);
+                lblPicture.setIcon(icon);
+            }
+            
+            dbCom.close();
+            dbCon.close();
+        } catch (SQLException | ClassNotFoundException ex)
+        {
+            JOptionPane.showMessageDialog(null, ex.toString());
+        } catch (IOException ex)
+        {
+            Logger.getLogger(ViewSpecificBook.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**
@@ -32,12 +97,13 @@ public class ViewSpecificBook extends JFrame {
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents() {
+    private void initComponents()
+    {
 
         jPanel1 = new javax.swing.JPanel();
         lblPicture = new javax.swing.JLabel();
         txtPublisher = new javax.swing.JTextField();
-        txISB = new javax.swing.JTextField();
+        txtISBN = new javax.swing.JTextField();
         txtTitle = new javax.swing.JTextField();
         txtAuthor = new javax.swing.JTextField();
         txtGenre = new javax.swing.JTextField();
@@ -48,10 +114,8 @@ public class ViewSpecificBook extends JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txtCopies = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -59,23 +123,34 @@ public class ViewSpecificBook extends JFrame {
         jLabel11 = new javax.swing.JLabel();
         txtShelfLocation = new javax.swing.JTextField();
         jLabel12 = new javax.swing.JLabel();
+        cmdBack = new javax.swing.JButton();
         cmdPlaceHold = new javax.swing.JButton();
         cmdLendBook = new javax.swing.JButton();
         filler1 = new javax.swing.Box.Filler(new java.awt.Dimension(0, 0), new java.awt.Dimension(0, 0), new java.awt.Dimension(32767, 32767));
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DO_NOTHING_ON_CLOSE);
+        setResizable(false);
+        addWindowListener(new java.awt.event.WindowAdapter()
+        {
+            public void windowClosing(java.awt.event.WindowEvent evt)
+            {
+                formWindowClosing(evt);
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         jPanel1.add(lblPicture, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 10, 210, 160));
 
-        txtPublisher.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        txtPublisher.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 txtPublisherActionPerformed(evt);
             }
         });
         jPanel1.add(txtPublisher, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 301, 150, -1));
-        jPanel1.add(txISB, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 150, -1));
+        jPanel1.add(txtISBN, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 180, 150, -1));
         jPanel1.add(txtTitle, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 211, 150, -1));
         jPanel1.add(txtAuthor, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 241, 150, -1));
         jPanel1.add(txtGenre, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 241, 150, -1));
@@ -95,15 +170,11 @@ public class ViewSpecificBook extends JFrame {
         jLabel5.setText("Publisher");
         jPanel1.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 301, 90, 20));
 
-        jLabel6.setText("Available Copies");
-        jPanel1.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 211, 90, 20));
-
         jLabel7.setText("Length");
         jPanel1.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 271, 90, 20));
 
         jLabel8.setText("Alternative Title");
         jPanel1.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 271, 90, 20));
-        jPanel1.add(txtCopies, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 211, 150, -1));
 
         jLabel9.setText("Author");
         jPanel1.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 241, 90, 20));
@@ -119,24 +190,38 @@ public class ViewSpecificBook extends JFrame {
 
         jLabel11.setText("Publication Date");
         jPanel1.add(jLabel11, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 301, 90, 20));
-        jPanel1.add(txtShelfLocation, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 180, 150, -1));
+        jPanel1.add(txtShelfLocation, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 210, 150, -1));
 
         jLabel12.setText("Shelf Location");
-        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 180, 90, 20));
+        jPanel1.add(jLabel12, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 210, 90, 20));
+
+        cmdBack.setText("Back");
+        cmdBack.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
+                cmdBackActionPerformed(evt);
+            }
+        });
+        jPanel1.add(cmdBack, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, 60));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 580, 450));
 
         cmdPlaceHold.setText("Place Hold");
-        cmdPlaceHold.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cmdPlaceHold.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 cmdPlaceHoldActionPerformed(evt);
             }
         });
         getContentPane().add(cmdPlaceHold, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 460, 130, 40));
 
         cmdLendBook.setText("Lend Book");
-        cmdLendBook.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        cmdLendBook.addActionListener(new java.awt.event.ActionListener()
+        {
+            public void actionPerformed(java.awt.event.ActionEvent evt)
+            {
                 cmdLendBookActionPerformed(evt);
             }
         });
@@ -159,6 +244,22 @@ public class ViewSpecificBook extends JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cmdLendBookActionPerformed
 
+    private void cmdBackActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdBackActionPerformed
+    {//GEN-HEADEREND:event_cmdBackActionPerformed
+        CloseForm();
+    }//GEN-LAST:event_cmdBackActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt)//GEN-FIRST:event_formWindowClosing
+    {//GEN-HEADEREND:event_formWindowClosing
+        // TODO add your handling code here:
+        CloseForm();
+    }//GEN-LAST:event_formWindowClosing
+
+    private void CloseForm()
+    {
+        libraryBook.setVisible(true);
+        this.dispose();
+    }
     /**
      * @param args the command line arguments
      */
@@ -189,12 +290,13 @@ public class ViewSpecificBook extends JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ViewSpecificBook(libraryBook,userID,bookID).setVisible(true);
+                new ViewSpecificBook().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton cmdBack;
     public javax.swing.JButton cmdLendBook;
     public javax.swing.JButton cmdPlaceHold;
     private javax.swing.Box.Filler filler1;
@@ -205,18 +307,16 @@ public class ViewSpecificBook extends JFrame {
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel lblPicture;
-    private javax.swing.JTextField txISB;
     private javax.swing.JTextField txtAlternativeTitle;
     private javax.swing.JTextField txtAuthor;
-    private javax.swing.JTextField txtCopies;
     private javax.swing.JTextField txtGenre;
+    private javax.swing.JTextField txtISBN;
     private javax.swing.JTextField txtLength;
     private javax.swing.JTextField txtPublicationDate;
     private javax.swing.JTextField txtPublisher;

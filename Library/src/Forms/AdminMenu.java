@@ -184,7 +184,7 @@ public class AdminMenu extends javax.swing.JFrame
     private void cmdReportsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdReportsActionPerformed
     {//GEN-HEADEREND:event_cmdReportsActionPerformed
         // TODO add your handling code here:
-        Reports form = new Reports();
+        Reports form = new Reports(this);
         form.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_cmdReportsActionPerformed

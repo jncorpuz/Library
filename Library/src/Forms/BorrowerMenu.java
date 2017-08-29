@@ -49,6 +49,7 @@ public class BorrowerMenu extends javax.swing.JFrame
         jMenu2 = new javax.swing.JMenu();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
         getContentPane().add(filler1, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 0, 480, 250));
 
@@ -104,10 +105,11 @@ public class BorrowerMenu extends javax.swing.JFrame
         setJMenuBar(jMenuBar1);
 
         pack();
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void cmdLibraryBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cmdLibraryBooksActionPerformed
-        LibraryBooks form = new LibraryBooks(this, userID);
+        LibraryBooksBorrower form = new LibraryBooksBorrower(this, userID);
         form.setVisible(true);
         this.setVisible(false);
     }//GEN-LAST:event_cmdLibraryBooksActionPerformed

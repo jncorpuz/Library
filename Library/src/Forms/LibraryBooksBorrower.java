@@ -20,7 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.*;
 import net.proteanit.sql.DbUtils;
-public class LibraryBooks extends JFrame
+public class LibraryBooksBorrower extends JFrame
 {
     private JFrame backFrame;
     private String userID;
@@ -29,14 +29,14 @@ public class LibraryBooks extends JFrame
      * Creates new form LibraryBooks
      * @param a
      */
-    public LibraryBooks(JFrame a, String userID)
+    public LibraryBooksBorrower(JFrame a, String userID)
     {
         backFrame = a;
         this.userID = userID;
         initComponents();
         PopulateCB();
     }
-    public LibraryBooks()
+    public LibraryBooksBorrower()
     {
         initComponents();
     }
@@ -115,14 +115,14 @@ public class LibraryBooks extends JFrame
         tbBooks.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][]
             {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {},
+                {},
+                {},
+                {}
             },
             new String []
             {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+
             }
         ));
         tbBooks.addMouseListener(new java.awt.event.MouseAdapter()
@@ -222,10 +222,9 @@ public class LibraryBooks extends JFrame
     private void tbBooksMouseClicked(java.awt.event.MouseEvent evt)//GEN-FIRST:event_tbBooksMouseClicked
     {//GEN-HEADEREND:event_tbBooksMouseClicked
         // TODO add your handling code here:
-        LendBooks form = new LendBooks(this, tbBooks.getValueAt(tbBooks.getSelectedRow(), 0).toString());
+        ViewSpecificBook form = new ViewSpecificBook(this, userID, tbBooks.getValueAt(tbBooks.getSelectedRow(), 0).toString());
         form.setVisible(true);
         this.setVisible(false);
-        
     }//GEN-LAST:event_tbBooksMouseClicked
 
     /**
@@ -250,17 +249,18 @@ public class LibraryBooks extends JFrame
             }
         } catch (ClassNotFoundException ex)
         {
-            java.util.logging.Logger.getLogger(LibraryBooks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LibraryBooksBorrower.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex)
         {
-            java.util.logging.Logger.getLogger(LibraryBooks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LibraryBooksBorrower.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex)
         {
-            java.util.logging.Logger.getLogger(LibraryBooks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LibraryBooksBorrower.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex)
         {
-            java.util.logging.Logger.getLogger(LibraryBooks.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(LibraryBooksBorrower.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
@@ -268,7 +268,7 @@ public class LibraryBooks extends JFrame
         {
             public void run()
             {
-                new LibraryBooks().setVisible(true);
+                new LibraryBooksBorrower().setVisible(true);
             }
         });
     }
