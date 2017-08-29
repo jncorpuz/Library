@@ -26,6 +26,7 @@ public class Reports extends javax.swing.JFrame
     public Reports()
     {
         initComponents();
+        GetData();
     }
 
     /**
@@ -35,8 +36,7 @@ public class Reports extends javax.swing.JFrame
      */
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
-    private void initComponents()
-    {
+    private void initComponents() {
 
         jLabel4 = new javax.swing.JLabel();
         cmdBorrowedBooks = new javax.swing.JButton();
@@ -55,10 +55,8 @@ public class Reports extends javax.swing.JFrame
         cmdBorrowedBooks.setText("Borrowed Books");
         cmdBorrowedBooks.setMaximumSize(new java.awt.Dimension(91, 24));
         cmdBorrowedBooks.setMinimumSize(new java.awt.Dimension(91, 24));
-        cmdBorrowedBooks.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        cmdBorrowedBooks.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdBorrowedBooksActionPerformed(evt);
             }
         });
@@ -66,10 +64,8 @@ public class Reports extends javax.swing.JFrame
         cmdPenaltyRecords.setText("Penalty Records");
         cmdPenaltyRecords.setMaximumSize(new java.awt.Dimension(91, 24));
         cmdPenaltyRecords.setMinimumSize(new java.awt.Dimension(91, 24));
-        cmdPenaltyRecords.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        cmdPenaltyRecords.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdPenaltyRecordsActionPerformed(evt);
             }
         });
@@ -77,10 +73,8 @@ public class Reports extends javax.swing.JFrame
         cmdLendBook2.setText("Lend Book");
         cmdLendBook2.setMaximumSize(new java.awt.Dimension(91, 24));
         cmdLendBook2.setMinimumSize(new java.awt.Dimension(91, 24));
-        cmdLendBook2.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        cmdLendBook2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdLendBook2ActionPerformed(evt);
             }
         });
@@ -88,25 +82,21 @@ public class Reports extends javax.swing.JFrame
         cmdLendBook3.setText("Lend Book");
         cmdLendBook3.setMaximumSize(new java.awt.Dimension(91, 24));
         cmdLendBook3.setMinimumSize(new java.awt.Dimension(91, 24));
-        cmdLendBook3.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        cmdLendBook3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdLendBook3ActionPerformed(evt);
             }
         });
 
         tblReport.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][]
-            {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+            new Object [][] {
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
-            new String []
-            {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+            new String [] {
+                "UserID", "ISBN", "Username", "Title", "BorrowedDate", "DueDate"
             }
         ));
         jScrollPane1.setViewportView(tblReport);
@@ -114,10 +104,8 @@ public class Reports extends javax.swing.JFrame
         cmdLendBook4.setText("Back");
         cmdLendBook4.setMaximumSize(new java.awt.Dimension(91, 24));
         cmdLendBook4.setMinimumSize(new java.awt.Dimension(91, 24));
-        cmdLendBook4.addActionListener(new java.awt.event.ActionListener()
-        {
-            public void actionPerformed(java.awt.event.ActionEvent evt)
-            {
+        cmdLendBook4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cmdLendBook4ActionPerformed(evt);
             }
         });
@@ -176,7 +164,27 @@ public class Reports extends javax.swing.JFrame
         
         
     }//GEN-LAST:event_cmdBorrowedBooksActionPerformed
+public void GetData() {
 
+        String sqlStatement = "select userID,bookISBN ,username, title,borrowDate,dueDate from bookinfo,borrowinfo,userdata where bookISBN=bookinfo.isbn && userdata.id = borrowInfo.UserID;";
+
+        try {
+            Connection dbCon = Database.DBConnection();
+            Statement dbCom = dbCon.createStatement();
+            ResultSet sqlRecord = dbCom.executeQuery(sqlStatement);
+            tblReport.setModel(DbUtils.resultSetToTableModel(sqlRecord));
+            dbCom.close();
+            dbCon.close();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e.getMessage());
+        }
+        // stat = "Select * from bookType";
+        //ResultSet rs = d.ExecuteQuery(stat);
+
+    }
     private void cmdPenaltyRecordsActionPerformed(java.awt.event.ActionEvent evt)//GEN-FIRST:event_cmdPenaltyRecordsActionPerformed
     {//GEN-HEADEREND:event_cmdPenaltyRecordsActionPerformed
         // TODO add your handling code here:
